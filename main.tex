@@ -1,6 +1,7 @@
 \documentclass[dissertation]{MSUstyle}
 %  Created by Seth Humphries 
 %  Update and maintained by Prof. Mark Owkes mark.owkes@me.montana.edu
+%
 %  For latest changes pull from the bitbucket repository
 % 
 %%    Copyright (c) 2007-2012 Seth D. Humphries
@@ -60,7 +61,7 @@
 \usepackage{amsmath}
 \usepackage{afterpage}
 \usepackage{fancyhdr}
-\usepackage{lipsum} % Generate random text
+\usepackage{lipsum} % Generates random text
 
 \lfoot{}\cfoot{}\rfoot{}  %clear footers
 \lhead{}\chead{}\rhead{}  %clear headers
@@ -159,24 +160,22 @@
 \end{preliminary}
 %% end making front matter
 
-
-
 % dissertation chapters, change the file names to the ones that you want like: filename.tex
-\input{introduction}
-\input{theory}
-\input{conclusion}
+\include{introduction}
+\include{theory}
+\include{conclusion}
 % Add additional chapters here
 
 % End matter
 \begin{postliminary}
-  \Appendtrue  %comment this out or remove if you do not have an appendix
+%  \Appendtrue  %comment this out or remove if you do not have an appendix
   \references  %do not change this
 \end{postliminary}
 
 
 \appendix % put appendix chapters here.
-\input{appendixa}
-\input{appendixb}
+\include{appendixa}
+\include{appendixb}
 
 \end{document}
 % do not put anything after this

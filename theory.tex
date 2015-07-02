@@ -1,6 +1,6 @@
 \chapter{Theory} \label{CH:theory}
 
-\msusection{Equations}\label{Sect:eqns}
+\section{Equations}\label{Sect:eqns}
 Here is an example of an equation
 \begin{equation}\label{eq:pyth}
   a^2+b^2=c^2,
@@ -22,10 +22,10 @@ Cases can be added using
   \end{cases}
 \end{equation}
 
-\msusubsection{Symbols}\label{Sect:sym}
+\subsection{Symbols}\label{Sect:sym}
 Symbols, like greek letters, can be used in equations, \eg, $\theta$, $\gamma$, and $\zeta$.  When variables are referenced in the text they should be written in mathmode and enclosed in dollar signs.  For example, $a$ and a, which are written in math and text modes, respectively.
 
-\msusection{Figures}\label{Sect:figs}
+\section{Figures}\label{Sect:figs}
 Figures can easily be added to your latex document.  Graphs and figures should be designed to be printed in black and white and clearly display information.  Considering using vectorized graphics that will remain sharp even if viewed zoomed (try zooming on Fig~\ref{fig:plot}).  The text in your figure should be legible and preferably the same size as the text in the rest of your document.
 
 \begin{figure}[htbp]
@@ -76,7 +76,7 @@ Figure~\ref{fig:tikz} shows that you can create figures directly within your \La
 \end{figure}
 
 
-\msusection{Tables}\label{Sect:tabs}
+\section{Tables}\label{Sect:tabs}
 Tables can be created directly in your \LaTeX{} document.
 \begin{table}[htbp]
   \centering
@@ -90,16 +90,16 @@ Tables can be created directly in your \LaTeX{} document.
 
 Table~\ref{tab:ice} shows how a short caption can be used in the table of contents and a long caption in the figure.  In the table of contents ``Area of ice sheet'' is listed above the table ``Area of ice sheet in millions of square miles with time.'' is listed.  This is done by adding an optional argument to the \verb|\caption| command, \ie, \verb|\caption[Short Caption]{Long Caption}|.
 
-\msusection{References and Citations}\label{Sect:ref_cite}
+\section{References and Citations}\label{Sect:ref_cite}
 
-\msusubsection{Referencing other parts of the document}\label{Sect:ref}
+\subsection{Referencing other parts of the document}\label{Sect:ref}
 Equations, figures, tables, sections, and chapters can be references using the \verb|\ref{label}| command.  For example, \verb|\ref{fig:plot}| references Fig.~\ref{fig:plot}.  
 
 You can also use the \verb|\vref| command to also get the page number.  For example, \verb|\vref{fig:plot}| references Fig.~\vref{fig:plot}.
 
 The \verb|label| used in the \verb|\ref| command can be anything you want to use. It is helpful to use a convention.  For example, all figures could have a label that starts with \verb|fig:| and all table labels could start with \verb|tab:|.
 
-\msusubsection{Citing others work}\label{Sect:cite}
+\subsection{Citing others work}\label{Sect:cite}
 Citing others work is an important aspect of all scientific writing.  All citations should be placed in the .bib file(s) listed in your main.tex document.  Cite others work using the \verb|\cite| command, \eg,~\cite{owkes_mesh-decoupled_2015}.  Multiple citations should be done within one cite command, \eg,~\cite{desjardins_direct_2013,owkes_discontinuous_2013,owkes_computational_2014}.  
 
 
