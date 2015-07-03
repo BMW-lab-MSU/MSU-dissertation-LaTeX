@@ -595,7 +595,7 @@
 %% Switch for generating a signature page
 % 
 \newif\ifsignaturepage
-\signaturepagetrue % initially true by default
+\signaturepagefalse % initially false by default
 
 %% Switch for generating a list of figures
 % 
@@ -1291,7 +1291,7 @@
 
 
   \ifsignaturepage%
-  % \makesignature%
+  \makesignature%
   \fi%
 
   % \makepermission
@@ -1712,7 +1712,7 @@
 
 % Long subsection title command
 \newcommand{\longsubsection}[3][]{%
-  \subsection[#1]{}%
+  \ifthenelse{\equal{#1}{}}{\subsection[#2\ #3]{}}{\subsection[#1]{}}%
   \vspace{-2em}
   \noindent{#2}\\[-1em]\uline{#3}\par
 }%
