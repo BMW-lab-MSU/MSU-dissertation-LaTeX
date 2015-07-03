@@ -252,7 +252,7 @@
 \widowpenalty=19999 % No widows at bottom of page 
 \clubpenalty=19999 % No orphans at top of page 
 \brokenpenalty=999 %no hyphenations at page breaks
-\hyphenpenalty=10000 %no hyphenation at end of lines
+\hyphenpenalty=1000 %no hyphenation at end of lines
 \tolerance=1000 %adjust to make the above penalties tighter or looser 
 \raggedbottom
 
