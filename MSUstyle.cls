@@ -1697,7 +1697,7 @@
 % Section titles format and spacing %
 % ================================= %
 \RequirePackage{titlesec}
-\RequirePackage{ulem}
+\RequirePackage[normalem]{ulem}
 
 % \titlespacing{<command>}{left}{before-sep}{after-sep}
 \titlespacing*{\chapter}{0pt}{*2}{*2}
