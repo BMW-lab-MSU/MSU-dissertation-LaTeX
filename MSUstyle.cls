@@ -774,9 +774,10 @@
 
 \newcommand{\theMTchapter}{\@Roman\c@chapter}
 \renewcommand{\theMTchapter}{\thechapter}
-\renewcommand{\listfigurename}{LIST OF FIGURES \\ Figure \hfill Page}
-\renewcommand{\listtablename}{LIST OF TABLES \\ Table \hfill Page}
-\renewcommand{\listalgorithmname}{\hspace{1.0in}LIST OF ALGORITHMS \newline Algorithm \hfill Page}
+\renewcommand{\contentsname}{~\\[-0.5em]TABLE OF CONTENTS\vspace{2em}}
+\renewcommand{\listfigurename}{~\\[-0.5em]LIST OF FIGURES \\[1em] Figure \hfill Page}
+\renewcommand{\listtablename}{~\\[-0.5em]LIST OF TABLES \\[1em] Table \hfill Page}
+\renewcommand{\listalgorithmname}{\hspace{1.0in}LIST OF ALGORITHMS \newline Algorithm \hfill Page\vspace{1em}}
 %% the listalgorithmname has the \hspace to center the title as there is no other quick method.
 
 \newcommand{\theHalgorithm}{\arabic{algorithm}} %this provides compatability with the algorithmic package
@@ -788,7 +789,7 @@
   \else
   \clearpage
   \fi
-  \quad \vfill
+  \quad \vspace{2.5in}
   \begin{center}
     APPENDICES
   \end{center}
@@ -808,7 +809,6 @@
 }
 
 \def\app@chapter[#1]#2{%
-  \quad \vfill
   \ifnum \c@secnumdepth > \m@ne
   \refstepcounter{chapter}%
   \protect{\addcontentsline{toc}{chapter}{\texorpdfstring%
@@ -938,7 +938,7 @@
   \set@MTtocskip{\MT@tmpa}
   {\newlinestretch{1}
     \listoftables
-    \addtocontents{lot}{\contheading[\lotpages]{List of tables}}
+    \addtocontents{lot}{\contheadingadv[\lotpages]{List of tables}{Table}}
   }
   \newpage
   \fi
@@ -955,7 +955,7 @@
   \set@MTtocskip{\MT@tmpa}
   {\newlinestretch{1}
     \listoffigures
-    \addtocontents{lof}{\contheading[\lofpages]{List of figures}}
+    \addtocontents{lof}{\contheadingadv[\lofpages]{List of figures}{Figure}}
   }
   \newpage
   \fi
@@ -970,9 +970,9 @@
   \settoheight{\MT@tmpa}{A}
   \set@MTtocskip{\MT@tmpa}
   {\newlinestretch{1}
-    \begin{doublespaced} %ensure double spacing for list of algorithms or as I sometimes call them 'al gore isms'
+    \begin{doublespaced} %ensure double spacing for list of algorithms
       \listofalgorithms
-      \addtocontents{loa}{\contheading[\loapages]{List of Algorithms}}
+      \addtocontents{loa}{\contheadingadv[\loapages]{List of Algorithms}{Algorithm}}
     \end{doublespaced}
   }
   \newpage
@@ -1002,22 +1002,50 @@
   \or
   {}%
   \or 
-  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\par\bigskip}}
+  \afterpage{\chapter*{#2~-~Continued}}
   \or 
-  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\par\bigskip}
-    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\par\bigskip}}
+  \afterpage{\chapter*{#2~-~Continued}
+    \Afterpage{\chapter*{#2~-~Continued}}
   }%
   \or 
-  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\par\bigskip}
-    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\par\bigskip}
-      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\par\bigskip}}
+  \afterpage{\chapter*{#2~-~Continued}
+    \afterpage{\chapter*{#2~-~Continued}
+      \afterpage{\chapter*{#2~-~Continued}}
     }%
   }%
   \or 
-  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\par\bigskip}
-    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\par\bigskip}
-      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\par\bigskip}
-        \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\par\bigskip}}
+  \afterpage{\chapter*{#2~-~Continued}
+    \afterpage{\chapter*{#2~-~Continued}
+      \afterpage{\chapter*{#2~-~Continued}
+        \afterpage{\chapter*{#2~-~Continued}}
+      }%
+    }%
+  }%
+  \fi  
+}%
+
+\DeclareRobustCommand*{\contheadingadv}[3][0]{%
+  \ifcase#1
+  {}%
+  \or
+  {}%
+  \or 
+  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+  \or 
+  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+  }%
+  \or 
+  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+    }%
+  }%
+  \or 
+  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+      \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+        \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
       }%
     }%
   }%
@@ -1037,6 +1065,7 @@
   \newcommand{\lotpages}{#2}
   \newcommand{\lofpages}{#3}
   \newcommand{\loapages}{#4}
+  % Set contents title spacing
   \do@contentspage
   \do@tablespage
   \do@figurespage
@@ -1700,7 +1729,8 @@
 \RequirePackage[normalem]{ulem}
 
 % \titlespacing{<command>}{left}{before-sep}{after-sep}
-\titlespacing*{\chapter}{0pt}{*2}{*2}
+\titleformat{\chapter}{\centering\uppercase}{}{0pt}{}
+\titlespacing*{\chapter}{0pt}{-24pt}{*2}
 \titlespacing{\section}{0pt}{*2}{*2}
 \titlespacing{\subsection}{0pt}{*2}{0pt}
 \titlespacing{\subsubsection}{0pt}{*2}{1ex}
