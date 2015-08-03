@@ -1001,24 +1001,94 @@
   {}%
   \or
   {}%
-  \or 
+  \or % 2 pages 
   \afterpage{\chapter*{#2~-~Continued}
   }
-  \or 
+  \or % 3 pages
   \afterpage{\chapter*{#2~-~Continued}
     \afterpage{\chapter*{#2~-~Continued}}
   }%
-  \or 
+  \or % 4 pages
   \afterpage{\chapter*{#2~-~Continued}
     \afterpage{\chapter*{#2~-~Continued}
       \afterpage{\chapter*{#2~-~Continued}}
     }%
   }%
-  \or 
+  \or % 5 pages
   \afterpage{\chapter*{#2~-~Continued}
     \afterpage{\chapter*{#2~-~Continued}
       \afterpage{\chapter*{#2~-~Continued}
         \afterpage{\chapter*{#2~-~Continued}}
+      }%
+    }%
+  }%
+  \or % 6 pages
+  \afterpage{\chapter*{#2~-~Continued}
+    \afterpage{\chapter*{#2~-~Continued}
+      \afterpage{\chapter*{#2~-~Continued}
+        \afterpage{\chapter*{#2~-~Continued}
+          \afterpage{\chapter*{#2~-~Continued}}
+        }%
+      }%
+    }%
+  }%
+  \or % 7 pages
+  \afterpage{\chapter*{#2~-~Continued}
+    \afterpage{\chapter*{#2~-~Continued}
+      \afterpage{\chapter*{#2~-~Continued}
+        \afterpage{\chapter*{#2~-~Continued}
+          \afterpage{\chapter*{#2~-~Continued}
+            \afterpage{\chapter*{#2~-~Continued}}
+          }%
+        }%
+      }%
+    }%
+  }%
+ \or % 8 pages
+  \afterpage{\chapter*{#2~-~Continued}
+    \afterpage{\chapter*{#2~-~Continued}
+      \afterpage{\chapter*{#2~-~Continued}
+        \afterpage{\chapter*{#2~-~Continued}
+          \afterpage{\chapter*{#2~-~Continued}
+            \afterpage{\chapter*{#2~-~Continued}
+              \afterpage{\chapter*{#2~-~Continued}}
+            }%
+          }%
+        }%
+      }%
+    }%
+  }%
+ \or % 9 pages
+  \afterpage{\chapter*{#2~-~Continued}
+    \afterpage{\chapter*{#2~-~Continued}
+      \afterpage{\chapter*{#2~-~Continued}
+        \afterpage{\chapter*{#2~-~Continued}
+          \afterpage{\chapter*{#2~-~Continued}
+            \afterpage{\chapter*{#2~-~Continued}
+              \afterpage{\chapter*{#2~-~Continued}
+                \afterpage{\chapter*{#2~-~Continued}}
+              }%
+            }%
+          }%
+        }%
+      }%
+    }%
+  }%
+ \or % 10 pages
+  \afterpage{\chapter*{#2~-~Continued}
+    \afterpage{\chapter*{#2~-~Continued}
+      \afterpage{\chapter*{#2~-~Continued}
+        \afterpage{\chapter*{#2~-~Continued}
+          \afterpage{\chapter*{#2~-~Continued}
+            \afterpage{\chapter*{#2~-~Continued}
+              \afterpage{\chapter*{#2~-~Continued}
+                \afterpage{\chapter*{#2~-~Continued}
+                  \afterpage{\chapter*{#2~-~Continued}}
+                }%
+              }%
+            }%
+          }%
+        }%
       }%
     }%
   }%
@@ -1030,23 +1100,93 @@
   {}%
   \or
   {}%
-  \or 
+  \or % 2 pages
   \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
-  \or 
+  \or % 3 pages
   \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
     \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
   }%
-  \or 
+  \or % 4 pages
   \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
     \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
       \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
     }%
   }%
-  \or 
+  \or % 5 pages
   \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
     \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
       \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
         \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+      }%
+    }%
+  }%
+  \or % 6 pages
+  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+      \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+        \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+          \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+        }%
+      } %
+    }%
+  }%
+  \or % 7 pages
+  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+      \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+        \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+          \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+            \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+          }%
+        }%
+      }%
+    }%
+  }%
+  \or % 8 pages
+  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+      \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+        \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+          \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+            \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+              \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+            }%
+          }%
+        }%
+      }%
+    }%
+  }%
+  \or % 9 pages
+  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+      \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+        \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+          \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+            \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+              \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+                \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+              }%
+            }%
+          }%
+        }%
+      }%
+    }%
+  }%
+  \or % 10 pages
+  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+      \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+        \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+          \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+            \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+              \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+                \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+                  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+                }%
+              }%
+            }%
+          }%
+        }%
       }%
     }%
   }%
