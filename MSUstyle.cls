@@ -1002,10 +1002,11 @@
   \or
   {}%
   \or 
-  \afterpage{\chapter*{#2~-~Continued}}
+  \afterpage{\chapter*{#2~-~Continued}
+  }
   \or 
   \afterpage{\chapter*{#2~-~Continued}
-    \Afterpage{\chapter*{#2~-~Continued}}
+    \afterpage{\chapter*{#2~-~Continued}}
   }%
   \or 
   \afterpage{\chapter*{#2~-~Continued}
