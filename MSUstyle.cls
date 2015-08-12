@@ -1888,6 +1888,8 @@
   \noindent{#2}\\[-1em]\uline{#3}\par
 }%
 
+% Indent after titles
+\RequirePackage{indentfirst}
 
 
 % ========================= %
