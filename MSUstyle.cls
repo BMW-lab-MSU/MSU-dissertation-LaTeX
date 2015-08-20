@@ -267,6 +267,10 @@
 % no default value (set by \pagestyle)
 % indicates that page numbers are in the upper corners
 
+%% Switch for alternative chapter headings (toggled by ``altchapter'' option).
+\newif\if@altchapter
+\@altchapterfalse % initially false by default
+
 %% Macro for testing the size of margins.
 \newcommand{\@marginsize}{}
 
@@ -308,6 +312,9 @@
   \newcommand{\brDRAFT}%
   {\raisebox{-3ex}[0pt][0pt]{\sffamily\scriptsize DRAFT\ V\rlap{ersion \@draftver}}}
 }%DeclareOption{draft}
+
+%% ``altchapter'' option: use alternative chapter headings
+\DeclareOption{altchapter}{\@altchaptertrue}
 
 
 %% Margin options: change the size of margins.
@@ -1868,9 +1875,13 @@
 % ================================= %
 \RequirePackage{titlesec}
 \RequirePackage[normalem]{ulem}
-
+\RequirePackage{fmtcount}
 % \titlespacing{<command>}{left}{before-sep}{after-sep}
-\titleformat{\chapter}{\centering\uppercase}{}{0pt}{}
+\if@altchapter
+  \titleformat{name=\chapter}[display]{\centering}{Chapter \Numberstringnum{\thechapter}}{2ex}{\centering}
+\else
+  \titleformat{\chapter}{\centering\uppercase}{}{0pt}{}
+\fi
 \titlespacing*{\chapter}{0pt}{-24pt}{*2}
 \titlespacing{\section}{0pt}{*2}{*2}
 \titlespacing{\subsection}{0pt}{*2}{0pt}
