@@ -1878,7 +1878,7 @@
 \RequirePackage{fmtcount}
 % \titlespacing{<command>}{left}{before-sep}{after-sep}
 \if@altchapter
-  \titleformat{name=\chapter}[display]{\centering}{Chapter \Numberstringnum{\thechapter}}{2ex}{\centering}
+  \titleformat{name=\chapter}[display]{\centering}{CHAPTER \NUMBERstringnum{\thechapter}}{2ex}{\uppercase}
 \else
   \titleformat{\chapter}{\centering\uppercase}{}{0pt}{}
 \fi
