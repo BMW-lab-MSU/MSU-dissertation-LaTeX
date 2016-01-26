@@ -1882,10 +1882,10 @@
 \else
   \titleformat{\chapter}{\centering\uppercase}{}{0pt}{}
 \fi
-\titlespacing*{\chapter}{0pt}{-24pt}{*2}
-\titlespacing{\section}{0pt}{*2}{*2}
-\titlespacing{\subsection}{0pt}{*2}{0pt}
-\titlespacing{\subsubsection}{0pt}{*2}{1ex}
+\titlespacing*{\chapter}{0pt}{-24pt}{*3}
+\titlespacing{\section}{0pt}{*3}{*3}
+\titlespacing{\subsection}{0pt}{*3}{0pt}
+\titlespacing{\subsubsection}{0pt}{*3}{1ex}
 
 % \titleformat{command}[shape]{format}{label}{sep}{before}[after]
 \titleformat{\section}[hang]{\centering}{\thesection}{0em}{\uline}
