@@ -904,13 +904,13 @@
 
 \renewcommand*\l@section{%
   \let\MT@@toclineskip=\MT@beforesecskip@value
-  \MT@dottedtocline{1}{1.5em}{1.5em}} %was 2.0em and 2.3em, 13apr2008
+  \MT@dottedtocline{1}{1.6em}{1.8em}} %was 2.0em and 2.3em, 13apr2008
 \renewcommand*\l@subsection{%
   \let\MT@@toclineskip=\MT@beforesubsecskip@value
-  \MT@dottedtocline{2}{2.6em}{2.6em}} %was 4.3em and 3.2 em, 13apr2008
+  \MT@dottedtocline{2}{3.8em}{2.0em}} %was 4.3em and 3.2 em, 13apr2008
 \renewcommand*\l@subsubsection{%
   \let\MT@@toclineskip=\MT@beforesubsubsecskip@value
-  \MT@dottedtocline{3}{3.7em}{3.7em}} %was 7.5em & 4.1em, 13apr2008
+  \MT@dottedtocline{3}{6.0em}{3.0em}} %was 7.5em & 4.1em, 13apr2008
 \renewcommand*\l@paragraph{%
   \let\MT@@toclineskip=\MT@beforeparaskip@value
   \MT@dottedtocline{4}{10.5em}{5em}}
@@ -920,7 +920,7 @@
 
 \renewcommand*\l@figure{%
   \let\MT@@toclineskip=\MT@beforefigskip@value
-  \MT@dottedtocline{1}{1.5em}{2.3em}}% this is indented 1.5em so that 
+  \MT@dottedtocline{1}{1.5em}{3.0em}}% this is indented 1.5em so that 
 % if you wish, you can add 'Figure' header
 % centered above the numbers using \addtocontents
 \renewcommand*\l@table{%
@@ -1120,43 +1120,43 @@
     }%
   }%
   \or % 5 pages
-  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-      \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-        \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+        \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
       }%
     }%
   }%
   \or % 6 pages
-  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-      \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-        \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-          \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+        \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+          \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
         }%
       } %
     }%
   }%
   \or % 7 pages
-  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-      \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-        \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-          \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-            \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+        \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+          \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+            \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
           }%
         }%
       }%
     }%
   }%
   \or % 8 pages
-  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-      \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-        \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-          \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-            \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-              \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+        \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+          \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+            \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+              \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
             }%
           }%
         }%
@@ -1164,14 +1164,14 @@
     }%
   }%
   \or % 9 pages
-  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-      \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-        \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-          \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-            \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-              \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-                \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+        \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+          \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+            \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+              \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+                \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
               }%
             }%
           }%
@@ -1180,15 +1180,15 @@
     }%
   }%
   \or % 10 pages
-  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-      \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-        \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-          \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-            \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-              \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-                \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-                  \afterpage{~\\[0.7em]{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+        \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+          \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+            \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+              \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+                \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
+                  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
                 }%
               }%
             }%
