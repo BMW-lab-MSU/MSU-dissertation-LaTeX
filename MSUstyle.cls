@@ -937,69 +937,77 @@
 
 \newcommand{\do@tablespage}{%
   \iftablespage
-  \if@openright\cleardoublepage\else\clearpage\fi 
-  % must clear page here, so that phantomsection\addcontentsline is on the correct page
-  \phantomsection%
-  \pdfbookmark[1]{\lotpdfbookmarkstring}{some Tables}%
-  \settoheight{\MT@tmpa}{A}
-  \set@MTtocskip{\MT@tmpa}
-  {\newlinestretch{1}
-    \listoftables
-    \addtocontents{lot}{\contheadingadv[\lotpages]{List of tables}{Table}}
-  }
-  \newpage
+    \ifnum\lotpages>0
+      \if@openright\cleardoublepage\else\clearpage\fi 
+      % must clear page here, so that phantomsection\addcontentsline is on the correct page
+      \phantomsection%
+      \pdfbookmark[1]{\lotpdfbookmarkstring}{some Tables}%
+      \settoheight{\MT@tmpa}{A}
+      \set@MTtocskip{\MT@tmpa}
+      {\newlinestretch{1}
+        \listoftables
+        \addtocontents{lot}{\contheadingadv[\lotpages]{List of tables}{Table}}
+      }
+      \newpage
+    \fi
   \fi
 }
 
 
 \newcommand{\do@figurespage}{%
   \iffigurespage
-  \if@openright\cleardoublepage\else\clearpage\fi 
-  % must clear page here, so that phantomsection\addcontentsline is on the correct page
-  \phantomsection%
-  \pdfbookmark[1]{\lofpdfbookmarkstring}{figas}%
-  \settoheight{\MT@tmpa}{A}
-  \set@MTtocskip{\MT@tmpa}
-  {\newlinestretch{1}
-    \listoffigures
-    \addtocontents{lof}{\contheadingadv[\lofpages]{List of figures}{Figure}}
-  }
-  \newpage
+    \ifnum\lofpages>0
+      \if@openright\cleardoublepage\else\clearpage\fi 
+      % must clear page here, so that phantomsection\addcontentsline is on the correct page
+      \phantomsection%
+      \pdfbookmark[1]{\lofpdfbookmarkstring}{figas}%
+      \settoheight{\MT@tmpa}{A}
+      \set@MTtocskip{\MT@tmpa}
+      {\newlinestretch{1}
+        \listoffigures
+        \addtocontents{lof}{\contheadingadv[\lofpages]{List of figures}{Figure}}
+      }
+      \newpage
+    \fi
   \fi
 }
 
 \newcommand{\do@algorithmspage}{%
   \ifalgorithmspage
-  \if@openright\cleardoublepage\else\clearpage\fi 
-  % must clear page here, so that phantomsection\addcontentsline is on the correct page
-  \phantomsection%
-  \pdfbookmark[1]{\loapdfbookmarkstring}{algores}%
-  \settoheight{\MT@tmpa}{A}
-  \set@MTtocskip{\MT@tmpa}
-  {\newlinestretch{1}
-    \begin{doublespaced} %ensure double spacing for list of algorithms
-      \listofalgorithms
-      \addtocontents{loa}{\contheadingadv[\loapages]{List of Algorithms}{Algorithm}}
-    \end{doublespaced}
-  }
-  \newpage
+    \ifnum\loapages>0
+      \if@openright\cleardoublepage\else\clearpage\fi 
+      % must clear page here, so that phantomsection\addcontentsline is on the correct page
+      \phantomsection%
+      \pdfbookmark[1]{\loapdfbookmarkstring}{algores}%
+      \settoheight{\MT@tmpa}{A}
+      \set@MTtocskip{\MT@tmpa}
+      {\newlinestretch{1}
+        \begin{doublespaced} %ensure double spacing for list of algorithms
+          \listofalgorithms
+          \addtocontents{loa}{\contheadingadv[\loapages]{List of Algorithms}{Algorithm}}
+        \end{doublespaced}
+      }
+      \newpage
+    \fi
   \fi
 }
 
 
 \newcommand{\do@contentspage}{%
   \ifcontentspage
-  \if@openright\cleardoublepage\else\clearpage\fi 
-  % must clear page here, so that phantomsection\addcontentsline is on the correct page
-  \phantomsection%
-  \pdfbookmark[0]{\tocpdfbookmarkstring}{toc}%
-  \settoheight{\MT@tmpa}{A}
-  \set@MTtocskip{\MT@tmpa}
-  {\newlinestretch{1}
-    \tableofcontents
-    \addtocontents{toc}{\contheading[\tocpages]{\contentsname}}
-  }
-  \newpage
+    \ifnum\tocpages>0
+      \if@openright\cleardoublepage\else\clearpage\fi 
+      % must clear page here, so that phantomsection\addcontentsline is on the correct page
+      \phantomsection%
+      \pdfbookmark[0]{\tocpdfbookmarkstring}{toc}%
+      \settoheight{\MT@tmpa}{A}
+      \set@MTtocskip{\MT@tmpa}
+      {\newlinestretch{1}
+        \tableofcontents
+        \addtocontents{toc}{\contheading[\tocpages]{\contentsname}}
+      }
+      \newpage
+    \fi
   \fi
 }
 
