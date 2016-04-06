@@ -146,14 +146,8 @@
     \input{acknow} % acknowledgements page
   \end{acknowledgements}
 
-  % Contents pages (Change numbers if table or list exceeds 1 page)
-  %% This works okay, but if you find a better way please share. %%
-  % TOC = Table of Contents
-  % LOT = List of Tables
-  % LOF = List of Figures
-  % LOA = List of Algorithms
-  % \contents{#TOC}{#LOT}{#LOF}{#LOA}
-  \contents{2}{1}{2}{0}
+  % Contents pages 
+  \contents
 
   \begin{abstract}
     \input{abstract} % abstract page
@@ -169,7 +163,7 @@
 
 % End matter
 \begin{postliminary}
-%  \Appendtrue  %comment this out or remove if you do not have an appendix
+  \Appendtrue  %comment out or remove if you do not have an appendix
   \references  %do not change this
 \end{postliminary}
 

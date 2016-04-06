@@ -100,25 +100,3 @@ The \verb|label| used in the \verb|\ref| command can be anything you want to use
 
 \subsection{Citing others work}\label{Sect:cite}
 Citing others work is an important aspect of all scientific writing.  All citations should be placed in the .bib file(s) listed in your main.tex document.  Cite others work using the \verb|\cite| command, \eg,~\cite{owkes_mesh-decoupled_2015}.  Multiple citations should be done within one cite command, \eg,~\cite{desjardins_direct_2013,owkes_discontinuous_2013,owkes_computational_2014}.  
-
-
-
-
-\newcount\loopcount
-\loopcount 30
-
-\loop 
-  \begin{figure}[htbp]
-    \centering
-    \begin{tikzpicture}[scale=1]
-      % Draw wall
-      \draw [] (0,0) rectangle (2,2);
-    \end{tikzpicture}
-    \caption{Figure created using the tikz package.}
-  \end{figure}
-  \clearpage
-  !
-\advance\loopcount-1
-\ifnum\loopcount>0
-\repeat 
-

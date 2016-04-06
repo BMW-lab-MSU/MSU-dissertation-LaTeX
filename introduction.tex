@@ -19,92 +19,18 @@ The are \textbf{not} similar commands for sections and subsubsections as these a
 
 \chapter{Introduction}
 
-\section{Section}
-\lipsum[1] % Random text
+\newcount\loopcount
+\loopcount 5
+\loop
+  \section{Section}
+  \lipsum[1] % Random text
 
-\subsection{Subsection}
-\lipsum[2] % Random text
+  \subsection{Subsection}
+  \lipsum[2] % Random text
 
-\subsubsection{Subsubsection}
-\lipsum[3] % Random text
+  \subsubsection{Subsubsection}
+  \lipsum[3] % Random text
 
-\section{Section}
-\lipsum[1] % Random text
-
-\subsection{Subsection}
-\lipsum[2] % Random text
-
-\subsubsection{Subsubsection}
-\lipsum[3] % Random text
-
-\section{Section}
-\lipsum[1] % Random text
-
-\subsection{Subsection}
-\lipsum[2] % Random text
-
-\subsubsection{Subsubsection}
-\lipsum[3] % Random text
-
-\section{Section}
-\lipsum[1] % Random text
-
-\subsection{Subsection}
-\lipsum[2] % Random text
-
-\subsubsection{Subsubsection}
-\lipsum[3] % Random text
-
-\section{Section}
-\lipsum[1] % Random text
-
-\subsection{Subsection}
-\lipsum[2] % Random text
-
-\subsubsection{Subsubsection}
-\lipsum[3] % Random text
-
-\section{Section}
-\lipsum[1] % Random text
-
-\subsection{Subsection}
-\lipsum[2] % Random text
-
-\subsubsection{Subsubsection}
-\lipsum[3] % Random text
-
-\section{Section}
-\lipsum[1] % Random text
-
-\subsection{Subsection}
-\lipsum[2] % Random text
-
-\subsubsection{Subsubsection}
-\lipsum[3] % Random text
-
-\section{Section}
-\lipsum[1] % Random text
-
-\subsection{Subsection}
-\lipsum[2] % Random text
-
-\subsubsection{Subsubsection}
-\lipsum[3] % Random text
-
-\section{Section}
-\lipsum[1] % Random text
-
-\subsection{Subsection}
-\lipsum[2] % Random text
-
-\subsubsection{Subsubsection}
-\lipsum[3] % Random text
-
-\section{Section}
-\lipsum[1] % Random text
-
-\subsection{Subsection}
-\lipsum[2] % Random text
-
-\subsubsection{Subsubsection}
-\lipsum[3] % Random text
+\advance\loopcount-1
+\ifnum\loopcount>0
+\repeat 

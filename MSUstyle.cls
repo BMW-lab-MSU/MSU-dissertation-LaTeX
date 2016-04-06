@@ -323,7 +323,6 @@
 \DeclareOption{normalmargins}{\renewcommand{\@marginsize}{1}}
 \DeclareOption{widemargins}{\renewcommand{\@marginsize}{2}}
 \DeclareOption{extrawidemargins}{\renewcommand{\@marginsize}{3}}
-\DeclareOption{oldmargins}{\renewcommand{\@marginsize}{4}}
 
 %% Point Size options: change current setting.
 \DeclareOption{10pt}{\renewcommand{\@thesisptsz}{10pt}}
@@ -837,9 +836,6 @@
 }
 
 \def\@makeapphead#1{%
-  \ifnum \@marginsize = 4 % oldmargins
-  \vspace*{20\p@}%
-  \fi
   { \parindent \z@ \raggedright \normalfont
     \quad \vfill
     \centering \underline{\MakeUppercase{\appendixname}\space \thechapter}
@@ -930,298 +926,209 @@
 \newlength{\MT@tmpa}
 
 
-
-
-
-
-
+%\RequirePackage{geometry}
 \newcommand{\do@tablespage}{%
   \iftablespage
-    \ifnum\lotpages>0
-      \if@openright\cleardoublepage\else\clearpage\fi 
-      % must clear page here, so that phantomsection\addcontentsline is on the correct page
-      \phantomsection%
-      \pdfbookmark[1]{\lotpdfbookmarkstring}{some Tables}%
-      \settoheight{\MT@tmpa}{A}
-      \set@MTtocskip{\MT@tmpa}
-      {\newlinestretch{1}
-        \listoftables
-        \addtocontents{lot}{\contheadingadv[\lotpages]{List of tables}{Table}}
-      }
-      \newpage
-    \fi
+  \if@openright\cleardoublepage\else\clearpage\fi 
+  % must clear page here, so that phantomsection\addcontentsline is on the correct page
+  \phantomsection%
+  \pdfbookmark[1]{\lotpdfbookmarkstring}{some Tables}%
+  \settoheight{\MT@tmpa}{A}
+  \set@MTtocskip{\MT@tmpa}
+  {\newlinestretch{1}
+    % Define headers
+    \def\conheadmark{\listhead{List of Tables - Continued}{Table}}
+    \def\firheadmark{\listhead{List of Tables}{Table}}
+
+    % Set pagestyle to continued
+    \pagestyle{continued}
+
+    % Setup header spacing
+    \expandafter\newgeometry\expandafter{\marginprel}
+    
+    % Header on first page
+    \thispagestyle{firstpage}
+
+    % List of Tables
+    \newlinestretch{1.0}%
+    \@starttoc{lot}
+
+    % End of list
+    \clearpage
+    
+    % Remove header spacing & reset pagestyle
+    \restoregeometry
+    \pagestyle{\front@pagestyle}
+  }
+  \newpage
   \fi
 }
 
 
 \newcommand{\do@figurespage}{%
   \iffigurespage
-    \ifnum\lofpages>0
-      \if@openright\cleardoublepage\else\clearpage\fi 
-      % must clear page here, so that phantomsection\addcontentsline is on the correct page
-      \phantomsection%
-      \pdfbookmark[1]{\lofpdfbookmarkstring}{figas}%
-      \settoheight{\MT@tmpa}{A}
-      \set@MTtocskip{\MT@tmpa}
-      {\newlinestretch{1}
-        \listoffigures
-        \addtocontents{lof}{\contheadingadv[\lofpages]{List of figures}{Figure}}
-      }
-      \newpage
-    \fi
+  \if@openright\cleardoublepage\else\clearpage\fi 
+  % must clear page here, so that phantomsection\addcontentsline is on the correct page
+  \phantomsection%
+  \pdfbookmark[1]{\lofpdfbookmarkstring}{figas}%
+  \settoheight{\MT@tmpa}{A}
+  \set@MTtocskip{\MT@tmpa}
+  {\newlinestretch{1}
+    % Define headers
+    \def\conheadmark{\listhead{List of Figures - Continued}{Figure}}
+    \def\firheadmark{\listhead{List of Figures}{Figure}}
+
+    % Set pagestyle to continued
+    \pagestyle{continued}
+
+    % Setup header spacing
+    \expandafter\newgeometry\expandafter{\marginprel}
+    
+    % Header on first page
+    \thispagestyle{firstpage}
+
+    % List of Figures
+    \newlinestretch{1.0}%
+    \@starttoc{lof}
+
+    % End of list
+    \clearpage
+    
+    % Remove header spacing & reset pagestyle
+    \restoregeometry
+    \pagestyle{\front@pagestyle}
+
+  }
+  \newpage
   \fi
 }
 
+
 \newcommand{\do@algorithmspage}{%
   \ifalgorithmspage
-    \ifnum\loapages>0
-      \if@openright\cleardoublepage\else\clearpage\fi 
-      % must clear page here, so that phantomsection\addcontentsline is on the correct page
-      \phantomsection%
-      \pdfbookmark[1]{\loapdfbookmarkstring}{algores}%
-      \settoheight{\MT@tmpa}{A}
-      \set@MTtocskip{\MT@tmpa}
-      {\newlinestretch{1}
-        \begin{doublespaced} %ensure double spacing for list of algorithms
-          \listofalgorithms
-          \addtocontents{loa}{\contheadingadv[\loapages]{List of Algorithms}{Algorithm}}
-        \end{doublespaced}
-      }
-      \newpage
-    \fi
+  \if@openright\cleardoublepage\else\clearpage\fi 
+  % must clear page here, so that phantomsection\addcontentsline is on the correct page
+  \phantomsection%
+  \pdfbookmark[1]{\loapdfbookmarkstring}{algores}%
+  \settoheight{\MT@tmpa}{A}
+  \set@MTtocskip{\MT@tmpa}
+  {\newlinestretch{1}
+    \begin{doublespaced} %ensure double spacing for list of algorithms
+      % Define headers
+      \def\firheadmark{\listhead{List of Algorithms}{Algorithm}}
+      \def\conheadmark{\listhead{List of Algorithms - Continued}{Algorithm}}
+
+      % Set pagestyle to continued
+      \pagestyle{continued}
+
+      % Setup header spacing
+      \expandafter\newgeometry\expandafter{\marginprel}
+      
+      % Header on first page
+      \thispagestyle{firstpage}
+
+      % List of Algoriths
+      \newlinestretch{1.0}%
+      \@starttoc{loa}
+
+      % End of list
+      \clearpage
+      
+      % Remove header spacing & reset pagestyle
+      \restoregeometry
+      \pagestyle{\front@pagestyle}
+      
+    \end{doublespaced}
+  }
+  \newpage
   \fi
 }
 
 
 \newcommand{\do@contentspage}{%
   \ifcontentspage
-    \ifnum\tocpages>0
-      \if@openright\cleardoublepage\else\clearpage\fi 
-      % must clear page here, so that phantomsection\addcontentsline is on the correct page
-      \phantomsection%
-      \pdfbookmark[0]{\tocpdfbookmarkstring}{toc}%
-      \settoheight{\MT@tmpa}{A}
-      \set@MTtocskip{\MT@tmpa}
-      {\newlinestretch{1}
-        \tableofcontents
-        \addtocontents{toc}{\contheading[\tocpages]{\contentsname}}
-      }
-      \newpage
-    \fi
+  \if@openright\cleardoublepage\else\clearpage\fi 
+  % must clear page here, so that phantomsection\addcontentsline is on the correct page
+  \phantomsection%
+  \pdfbookmark[0]{\tocpdfbookmarkstring}{toc}%
+  \settoheight{\MT@tmpa}{A}
+  \set@MTtocskip{\MT@tmpa}
+  {\newlinestretch{1}
+    % Define headers
+    \def\firheadmark{\tochead{Table of Contents}}
+    \def\conheadmark{\tochead{Table of Contents - Continued}}
+
+    % Set pagestyle to continued
+    \pagestyle{continued}
+
+    % Setup header spacing
+    \expandafter\newgeometry\expandafter{\marginprel}
+    
+    % Header on first page
+    \newlinestretch{1.0}%
+    \thispagestyle{firstpage}
+
+    % List of Figures
+    \@starttoc{toc}
+
+    % End of list
+    \clearpage
+    
+    % Remove header spacing & reset pagestyle
+    \restoregeometry
+    \pagestyle{\front@pagestyle}
+  }
+  \newpage
   \fi
 }
 
-\DeclareRobustCommand*{\contheading}[2][0]{%
-  \ifcase#1
-  {}%
-  \or
-  {}%
-  \or % 2 pages 
-  \afterpage{\chapter*{#2~-~Continued}
+% Preamble headings
+\newcommand\tochead[1]{%
+  \normalfont\centering\uppercase{#1}\\[1em]
+  ~~\\[1.5em]
+}%
+
+% LOT, LOF, LOA
+\newcommand\listhead[2]{%
+  \normalfont\centering\uppercase{#1}\\[1em]
+  #2\hfill Page\\[1.5em]
+}%
+
+
+% First page - pagestyle
+\def\ps@firstpage{%
+  \def\@oddhead{
+    \parbox[t]{\textwidth}{%
+      \begin{singlespaced}%
+        \hfil\thepage\hfil\\~\\%
+        \firheadmark%
+      \end{singlespaced}%
+    }%
   }
-  \or % 3 pages
-  \afterpage{\chapter*{#2~-~Continued}
-    \afterpage{\chapter*{#2~-~Continued}}
-  }%
-  \or % 4 pages
-  \afterpage{\chapter*{#2~-~Continued}
-    \afterpage{\chapter*{#2~-~Continued}
-      \afterpage{\chapter*{#2~-~Continued}}
-    }%
-  }%
-  \or % 5 pages
-  \afterpage{\chapter*{#2~-~Continued}
-    \afterpage{\chapter*{#2~-~Continued}
-      \afterpage{\chapter*{#2~-~Continued}
-        \afterpage{\chapter*{#2~-~Continued}}
-      }%
-    }%
-  }%
-  \or % 6 pages
-  \afterpage{\chapter*{#2~-~Continued}
-    \afterpage{\chapter*{#2~-~Continued}
-      \afterpage{\chapter*{#2~-~Continued}
-        \afterpage{\chapter*{#2~-~Continued}
-          \afterpage{\chapter*{#2~-~Continued}}
-        }%
-      }%
-    }%
-  }%
-  \or % 7 pages
-  \afterpage{\chapter*{#2~-~Continued}
-    \afterpage{\chapter*{#2~-~Continued}
-      \afterpage{\chapter*{#2~-~Continued}
-        \afterpage{\chapter*{#2~-~Continued}
-          \afterpage{\chapter*{#2~-~Continued}
-            \afterpage{\chapter*{#2~-~Continued}}
-          }%
-        }%
-      }%
-    }%
-  }%
- \or % 8 pages
-  \afterpage{\chapter*{#2~-~Continued}
-    \afterpage{\chapter*{#2~-~Continued}
-      \afterpage{\chapter*{#2~-~Continued}
-        \afterpage{\chapter*{#2~-~Continued}
-          \afterpage{\chapter*{#2~-~Continued}
-            \afterpage{\chapter*{#2~-~Continued}
-              \afterpage{\chapter*{#2~-~Continued}}
-            }%
-          }%
-        }%
-      }%
-    }%
-  }%
- \or % 9 pages
-  \afterpage{\chapter*{#2~-~Continued}
-    \afterpage{\chapter*{#2~-~Continued}
-      \afterpage{\chapter*{#2~-~Continued}
-        \afterpage{\chapter*{#2~-~Continued}
-          \afterpage{\chapter*{#2~-~Continued}
-            \afterpage{\chapter*{#2~-~Continued}
-              \afterpage{\chapter*{#2~-~Continued}
-                \afterpage{\chapter*{#2~-~Continued}}
-              }%
-            }%
-          }%
-        }%
-      }%
-    }%
-  }%
- \or % 10 pages
-  \afterpage{\chapter*{#2~-~Continued}
-    \afterpage{\chapter*{#2~-~Continued}
-      \afterpage{\chapter*{#2~-~Continued}
-        \afterpage{\chapter*{#2~-~Continued}
-          \afterpage{\chapter*{#2~-~Continued}
-            \afterpage{\chapter*{#2~-~Continued}
-              \afterpage{\chapter*{#2~-~Continued}
-                \afterpage{\chapter*{#2~-~Continued}
-                  \afterpage{\chapter*{#2~-~Continued}}
-                }%
-              }%
-            }%
-          }%
-        }%
-      }%
-    }%
-  }%
-  \fi  
+  \let\@evenhead\@oddhead
 }%
 
-\DeclareRobustCommand*{\contheadingadv}[3][0]{%
-  \ifcase#1
-  {}%
-  \or
-  {}%
-  \or % 2 pages
-  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
-  \or % 3 pages
-  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
-  }%
-  \or % 4 pages
-  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
+% Continued pages - pagestyle
+\def\ps@continued{%
+  \def\@oddhead{
+    \parbox[t]{\textwidth}{%
+      \begin{singlespaced}%
+        \hfil\thepage\hfil\\~\\%
+        \conheadmark%
+      \end{singlespaced}%
     }%
-  }%
-  \or % 5 pages
-  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-        \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
-      }%
-    }%
-  }%
-  \or % 6 pages
-  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-        \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-          \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
-        }%
-      } %
-    }%
-  }%
-  \or % 7 pages
-  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-        \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-          \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-            \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
-          }%
-        }%
-      }%
-    }%
-  }%
-  \or % 8 pages
-  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-        \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-          \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-            \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-              \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
-            }%
-          }%
-        }%
-      }%
-    }%
-  }%
-  \or % 9 pages
-  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-        \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-          \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-            \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-              \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-                \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
-              }%
-            }%
-          }%
-        }%
-      }%
-    }%
-  }%
-  \or % 10 pages
-  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-    \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-      \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-        \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-          \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-            \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-              \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-                \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}
-                  \afterpage{{\normalfont\centering\uppercase{#2~-~Continued}\\[1em]#3\hfill Page\\[1.5em]}}
-                }%
-              }%
-            }%
-          }%
-        }%
-      }%
-    }%
-  }%
-  \fi  
+  }
+  \let\@evenhead\@oddhead
 }%
 
-
-
-% simplify setup   now i only have to call \contents to get all the lists and tables done. 
-\newcommand{\contents}[4]{%
+% Call \contents to get all the lists and tables done. 
+\newcommand{\contents}{%
   \newpage
+  % Set contents title spacing
   \newlinestretch{\@spacing}
   \setlotdepth
   \setlofdepth  %these tell listof table and figures to print output despite what appears in TOC.
-  % Get input number of pages
-  \newcommand{\tocpages}{#1}
-  \newcommand{\lotpages}{#2}
-  \newcommand{\lofpages}{#3}
-  \newcommand{\loapages}{#4}
-  % Set contents title spacing
+  % Make contents pages
   \do@contentspage
   \do@tablespage
   \do@figurespage
@@ -1428,9 +1335,6 @@
 }
 
 \def\@makechapterhead#1{%
-  \ifnum \@marginsize = 4 % oldmargins
-  \vspace*{20\p@}% changed from 50
-  \fi
   { \parindent \z@ \raggedright \normalfont
     \interlinepenalty\@M
     \centering  \MakeUppercase{#1}\par\nobreak
@@ -1449,9 +1353,6 @@
 }
 
 \def\@makeschapterhead#1{%
-  \ifnum \@marginsize = 4 % oldmargins
-  \vspace*{30\p@}% changed from 50
-  \fi
   { \parindent \z@ \raggedright \normalfont
     \interlinepenalty\@M
     \centering  #1\par\nobreak
@@ -1520,9 +1421,6 @@
   % make sure that linestretch is already set to 1, and all 
   % grouping/sectioning commands have already been begun.
   \ifstrictmargins
-  \ifnum \@marginsize = 4 % oldmargins
-  \vspace*{50\p@}%
-  \fi
   \vspace*{0.0in} %.5 RW
   \begin{center}%
     \begin{doublespaced}%
@@ -1667,12 +1565,32 @@
   \if@openright\cleardoublepage\else\clearpage\fi 
   \phantomsection%
   \pdfbookmark[1]{Dedication}{dedication}
-  \chapter*{\MakeUppercase{Dedication}}
-  \vspace{0.4in}
+  % Define headers
+  \def\firheadmark{\tochead{Dedication}}
+  \def\conheadmark{\tochead{Dedication - Continued}}
+
+  % Set pagestyle to continued
+  \pagestyle{continued}
+
+  % Setup header spacing
+  \expandafter\newgeometry\expandafter{\marginprel}
+  
+  % Header on first page
+  \thispagestyle{firstpage}
+
   \begingroup
-  \newlinestretch{1.0}
-}{%
-  \par\endgroup}% end dedication
+  \begin{singlespaced}
+}{
+  \par
+  \end{singlespaced}
+  \endgroup 
+  % End of Dedication
+  \clearpage
+  
+  % Remove header spacing & reset pagestyle
+  \restoregeometry
+  \pagestyle{\front@pagestyle}
+}% end dedication
 
 
 % 
@@ -1683,11 +1601,31 @@
   \if@openright\cleardoublepage\else\clearpage\fi 
   \phantomsection%
   \pdfbookmark[1]{Acknowledgements}{acknowledgements}
-  \chapter*{\MakeUppercase{Acknowledgements}}
-  \vspace{0.40in}
+
+  % Define headers
+  \def\firheadmark{\tochead{Acknowledgements}}
+  \def\conheadmark{\tochead{Acknowledgements - Continued}}
+
+  % Set pagestyle to continued
+  \pagestyle{continued}
+
+  % Setup header spacing
+  \expandafter\newgeometry\expandafter{\marginprel}
+  
+  % Header on first page
+  \thispagestyle{firstpage}
+
   \begingroup
+    
   % \newlinestretch{1.0}
-}{\par\endgroup}%Acknowledgements
+}{\par\endgroup 
+  % End of Acknowlegements
+  \clearpage
+  
+  % Remove header spacing & reset pagestyle
+  \restoregeometry
+  \pagestyle{\front@pagestyle}
+}%Acknowledgements
 
 
 %% \begin{vita}...\end{vita} formats a
@@ -1697,12 +1635,32 @@
   \if@openright\cleardoublepage\else\clearpage\fi 
   \phantomsection%
   \pdfbookmark[1]{Cirriculum Vitae}{vita}
-  \chapter*{\MakeUppercase{Vita}}
-  \@mkboth{\scshape\MakeUppercase{Vita}}%
-  {\scshape\MakeUppercase{Vita}}%
+  % Define headers
+  \def\firheadmark{\tochead{Vita}}
+  \def\conheadmark{\tochead{Vita - Continued}}
+
+  % Set pagestyle to continued
+  \pagestyle{continued}
+
+  % Setup header spacing
+  \expandafter\newgeometry\expandafter{\marginprel}
+  
+  % Header on first page
+  \thispagestyle{firstpage}
+
   \begingroup
-  \newlinestretch{1.0}
-}{ \par\endgroup}%Vita
+  \begin{singlespaced}
+}{
+  \par
+  \end{singlespaced}
+  \endgroup 
+  % End of Vita
+  \clearpage
+  
+  % Remove header spacing & reset pagestyle
+  \restoregeometry
+  \pagestyle{\front@pagestyle}
+} %endVita
 
 
 %% Change \begin{abstract}...\end{abstract} to follow guidelines
@@ -1712,12 +1670,32 @@
   \if@openright\cleardoublepage\else\clearpage\fi 
   \phantomsection%
   \pdfbookmark[0]{Abstract}{abstract}
-  \chapter*{\MakeUppercase{Abstract}}
-  \vspace{0.4in}
+  % Define headers
+  \def\firheadmark{\tochead{Abstract}}
+  \def\conheadmark{\tochead{Abstract - Continued}}
+
+  % Set pagestyle to continued
+  \pagestyle{continued}
+
+  % Setup header spacing
+  \expandafter\newgeometry\expandafter{\marginprel}
+  
+  % Header on first page
+  \thispagestyle{firstpage}
+
   \begingroup
-  % \hspace*{2.5em}
-  \newlinestretch{1.0}
-}{\par\endgroup}%abstract
+  \begin{singlespaced}
+}{
+  \par
+  \end{singlespaced}
+  \endgroup 
+  % End of Dedication
+  \clearpage
+  
+  % Remove header spacing & reset pagestyle
+  \restoregeometry
+  \pagestyle{\front@pagestyle}
+}%abstract
 
 
 %% formatting for stuff after the main body of text
@@ -1835,48 +1813,6 @@
 }%ps@tcplain
 \fi % @twoside
 
-
-% %% Section formatting
-% \renewcommand{\section}{%
-%   \@startsection{section}{1}{\z@}%
-%   {3.70ex plus 0ex minus 0ex}%
-%   {3.50ex plus 0ex minus 0ex}%
-%   % {43pt}%
-%   % {28pt}%
-%   % {\newlinestretch{1}\normalfont\centering}
-%   {\normalfont\centering}
-% }%
-% \renewcommand{\subsection}{%
-%   \@startsection{subsection}{2}{\z@}%
-%   % {0pt}%
-%   % {28pt}
-%   {3.3ex plus 0ex minus 0ex}%
-%   {1.0ex plus 0ex minus 0ex}%
-%   {\normalfont\normalsize}
-%   % {\newlinestretch{1}\normalfont\normalsize}
-% }%
-% \renewcommand{\subsubsection}{%
-%   \@startsection{subsubsection}{3}{.25in}%
-%   {3.3ex plus 0ex minus 0ex}%
-%   {0ex}%
-%   % {\newlinestretch{1}\normalfont\normalsize}
-%   {\normalfont\normalsize}
-% }%
-
-
-% % New commands to ensure underlining and such for sections, subs and sub-subs
-% % 
-% \newcommand{\msusection}[1]{%
-%   \section[#1]{\underline{#1}}
-% }
-% \newcommand{\msusubsection}[1]{%
-%   \subsection[#1]{\protect{\noindent\underline{#1}}}
-% }
-
-
-% \newcommand{\msusubsubsection}[1]{%
-%   \subsubsection[#1]{\underline{#1}: \quad}
-%   }
   
 % ================================= %
 % Section titles format and spacing %
@@ -1922,89 +1858,24 @@
 \setlength\parindent{5ex}
 
 % 
-%% Page layout (see The LaTeX Companion pp.84-86).
-% 
-%% By default, TeX puts the ``reference point'' one inch down and to
-%% the right of the top-left corner of the page.  This moves it back
-%% to the top-left corner (making the rest of the layout easier to
-%% define).
-\setlength{\voffset}{-1in}
-\setlength{\hoffset}{-1in}
-% 
-%% Instead of hard-coding the page layout for letter paper
-%% (8.5" x 11"), we will base it on \paperheight and \paperwidth,
-%% so that it works with options that change the paper size.
-\setlength{\textheight}{\paperheight}
-\setlength{\textwidth}{\paperwidth}
-% 
-%% Now, set the margin-dependent values.
-% 
-\ifcase\@marginsize % set narrow margins: 1 1/4" left, 3/4" others
-% 
-\addtolength{\textheight}{-1.5in}
-\setlength{\topmargin}{.5in}
-\setlength{\headsep}{.25in}
-\setlength{\footskip}{.25in}
-\addtolength{\textwidth}{-2in}
-\setlength{\oddsidemargin}{1.25in}
-\setlength{\evensidemargin}{.75in}
-\setlength{\marginparwidth}{.5in}
-\setlength{\marginparsep}{.125in}
-% 
-\or % set normal margins: 1.5 " left, 1" others (modified 01/27/01)
-% 
-\addtolength{\textheight}{-2in}
-\setlength{\topmargin}{0.5in}
-\setlength{\headsep}{0.5in}   % reduced by headheight, below
-\setlength{\footskip}{0.5in}
-\addtolength{\textwidth}{-2.5in}
-\setlength{\oddsidemargin}{1.5in}
-\setlength{\evensidemargin}{1in}
-\setlength{\marginparwidth}{.75in}
-\setlength{\marginparsep}{.125in}
-% 
-\or % set wide margins: 1.5" left, 1" others, 2"" top (modified 01/14/00)
-% 
-\addtolength{\textheight}{-3in}
-\setlength{\topmargin}{1in}
-\setlength{\headsep}{.5in} % reduced by headheight, below
-\setlength{\footskip}{0.5in}
-\addtolength{\textwidth}{-2.5in}
-\setlength{\oddsidemargin}{1.5in}
-\setlength{\evensidemargin}{1in}
-\setlength{\marginparwidth}{.75in}
-\setlength{\marginparsep}{.125in}
-% 
-\or % set extra wide margins: 1 1/2"" all around
-% 
-\addtolength{\textheight}{-3in}
-\setlength{\topmargin}{1in}
-\setlength{\headsep}{.5in}
-\setlength{\footskip}{.5in}
-\addtolength{\textwidth}{-3in}
-\setlength{\oddsidemargin}{1.5in}
-\setlength{\evensidemargin}{1.5in}
-\setlength{\marginparwidth}{1in}
-\setlength{\marginparsep}{.25in}
-% 
-\or % use oldmargin (OLD GT): 1.5" left and top, 1" others (modified 01/27/01)
-% 
-\addtolength{\textheight}{-2.5in}
-\setlength{\topmargin}{0.75in}
-\setlength{\headsep}{0.75in}   % reduced by headheight, below
-\setlength{\footskip}{0.5in}
-\addtolength{\textwidth}{-2.5in}
-\setlength{\oddsidemargin}{1.5in}
-\setlength{\evensidemargin}{1in}
-\setlength{\marginparwidth}{.75in}
-\setlength{\marginparsep}{.125in}
-% 
+%% Page layout based on marginsize option using geometry package
+
+\ifcase\@marginsize 
+% set narrow margins
+\def\margingeom{inner=1.25in,outer=0.75in,top=1.25in,bottom=0.75in}
+\or 
+% set normal margins
+\def\margingeom{inner=1.5in,outer=1.0in,top=1.5in,bottom=1.0in}
+\def\marginprel{inner=1.5in,outer=1.0in,top=2.125in,bottom=1.0in,headsep=1in} \or 
+% set wide margins
+\def\margingeom{inner=1.5in,outer=1.0in,top=2.0in,bottom=1.0in}
+\or
+% set extra wide margins: 1 1/2"" all around
+\def\margingeom{inner=1.5in,outer=1.5in,top=2.0in,bottom=1.5in}
 \fi%@marginsize
-% 
-% 
-%% Adjust \headsep to include height of running head.
-\addtolength{\headsep}{-\headheight}
-% 
+\RequirePackage[\margingeom]{geometry}
+
+ 
 %% Adjust the vertical spacing between the main text and the notes,
 %% and between successive notes if they are not single-spaced.
 \setlength{\skip\footins}{.75\baselineskip}
@@ -2018,28 +1889,9 @@
 \setfrontpagestyle{tcplain}
 \setbodypagestyle{tcplain}
 \setbackpagestyle{tcplain}
-% 
-% margins for MSU ETD's -- 
-\addtolength{\textheight}{-.5in}
-\addtolength{\topmargin}{.5in}
 
 
-% \def\strip@period#1.\relax#2\@@@{#1}
-
-
-%% stuff i commented out 05Mar2008 after fixing appendix/lot/lof issues
 \AtBeginDocument{\protect{\setcounter{secnumdepth}{0}}}
-% \setcounter{tocdepth}{0}
-% \setchaptertocdepth{0}
-% \setappendixtocdepth{0}
-% \brokenpenalty=10000
-
-% \AtEndDocument{%
-% \immediate\write\@auxout%
-% {\string\@writefile{lof}{\string\setcounter{secnumdepth}{4}}}
-% }
-
-%   
 
 \renewenvironment{table}
 {\setlength\abovecaptionskip{6\p@}%
