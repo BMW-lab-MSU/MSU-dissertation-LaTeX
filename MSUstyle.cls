@@ -271,9 +271,6 @@
 \newif\if@altchapter
 \@altchapterfalse % initially false by default
 
-%% Macro for testing the size of margins.
-\newcommand{\@marginsize}{}
-
 %% Because of the draft option, and to allow users to override
 %% defaults, we don't want to be passing conflicting options back to
 %% the report class, so we define our own temporary toggles holding
@@ -316,13 +313,6 @@
 %% ``altchapter'' option: use alternative chapter headings
 \DeclareOption{altchapter}{\@altchaptertrue}
 
-
-%% Margin options: change the size of margins.
-%% choose normalmargins option
-\DeclareOption{narrowmargins}{\renewcommand{\@marginsize}{0}}
-\DeclareOption{normalmargins}{\renewcommand{\@marginsize}{1}}
-\DeclareOption{widemargins}{\renewcommand{\@marginsize}{2}}
-\DeclareOption{extrawidemargins}{\renewcommand{\@marginsize}{3}}
 
 %% Point Size options: change current setting.
 \DeclareOption{10pt}{\renewcommand{\@thesisptsz}{10pt}}
@@ -738,7 +728,150 @@
 \setloastring{List of Algorithms}
 
 
+%%%%%% Page Styles
+% 
+% redefinition of tcplain to meet MSU requirements (top center page numbering)
+\if@twoside % if two-sided printing
+\newcommand{\ps@tcplain}{%
+  \@tcpagetrue%
+  \let\@mkboth\markboth%
+  \def\@oddfoot{%
+    \if@draft%
+    \blDRAFT\hfil%
+    {\slshape\small\today}\hfil\brDRAFT%
+    \fi%
+  }%
+  \let\@evenfoot\@oddfoot%
+  \def\@oddhead{%
+    \if@draft\tlDRAFT\fi%
+    \hfil\thepage\hfil%
+    \if@draft\trDRAFT\fi%
+  }%
+  \def\@evenhead{%
+    \if@draft\tlDRAFT\fi%
+    \hfil\thepage\hfil%
+    \if@draft\trDRAFT\fi%
+  }%
+}%ps@tcplain
+\else % if one-sided printing
+\newcommand{\ps@tcplain}{%
+  \@tcpagetrue%
+  \let\@mkboth\markboth%
+  \def\@oddfoot{%
+    \if@draft%
+    \blDRAFT\hfil%
+    {\slshape\small\today}\hfil\brDRAFT%
+    \fi%
+  }%
+  \def\@oddhead{%
+    \if@draft\tlDRAFT\fi%
+    \hfil\thepage\hfil%
+    \if@draft\trDRAFT\fi%
+  }%
+}%ps@tcplain
+\fi % @twoside
 
+  
+% ================================= %
+% Section titles format and spacing %
+% ================================= %
+\RequirePackage{titlesec}
+\RequirePackage[normalem]{ulem}
+\RequirePackage{fmtcount}
+% \titlespacing{<command>}{left}{before-sep}{after-sep}
+\if@altchapter
+  \titleformat{name=\chapter}[display]{\centering}{CHAPTER \NUMBERstringnum{\thechapter}}{2ex}{\uppercase}
+\else
+  \titleformat{\chapter}{\centering\uppercase}{}{0pt}{}
+\fi
+\titlespacing*{\chapter}{0pt}{-24pt}{*3}
+\titlespacing{\section}{0pt}{*3}{*3}
+\titlespacing{\subsection}{0pt}{*3}{0pt}
+\titlespacing{\subsubsection}{0pt}{*3}{1ex}
+
+% \titleformat{command}[shape]{format}{label}{sep}{before}[after]
+\titleformat{\section}[hang]{\centering}{\thesection}{0em}{\uline}
+\titleformat{\subsection}[hang]{}{\thesection}{0em}{\uline}[]
+\titleformat{\subsubsection}[runin]{}{\thesection}{0em}{\indent\uline}
+
+% Long subsection title command
+\newcommand{\longsubsection}[3][]{%
+  \ifthenelse{\equal{#1}{}}{\subsection[#2\ #3]{}}{\subsection[#1]{}}%
+  \vspace{-2em}
+  \noindent{#2}\\[-1em]\uline{#3}\par
+}%
+
+% Indent after titles
+\RequirePackage{indentfirst}
+
+% ========================= %
+%       Document Layout     %
+% ========================= %
+%% Set margins
+\setlength{\headsep}{\baselineskip}
+\newlength\newtop \newtop=1in
+% Top of number should be at 1 in (add height of 1 line)
+\addtolength{\newtop}{\baselineskip} 
+% Top header also includes headsep (distance between number and top of text
+\addtolength{\newtop}{\headsep}      
+% Define all margins
+\def\margingeom{inner=1.5in,outer=1.0in,top=\newtop,bottom=1.0in,headsep=\headsep}
+% Set margins using geometry package (showframe for debugging)
+%\RequirePackage[\margingeom,showframe]{geometry}
+\RequirePackage[\margingeom]{geometry}
+
+% Margins used for preliminary pages
+\newlength\prelheadsep \prelheadsep=\headsep
+\newlength\preltop     \preltop=\newtop
+\addtolength{\prelheadsep}{3\baselineskip}
+\addtolength{\preltop}{3\baselineskip}
+\def\marginprel{inner=1.5in,outer=1.0in,top=\preltop,bottom=1.0in,headsep=\prelheadsep}
+
+% Margins used for LOF, LOT, and LOA (extra line for headings)
+\newlength\listheadsep \listheadsep=\headsep
+\newlength\listtop     \listtop=\newtop
+\addtolength{\listheadsep}{5\baselineskip}
+\addtolength{\listtop}{5\baselineskip}
+\def\marginlist{inner=1.5in,outer=1.0in,top=\listtop,bottom=1.0in,headsep=\listheadsep}
+
+% Default line spacing: use current setting from options.
+\linespacing{\@thesislnsp}
+
+%% Default indent
+\setlength\parindent{5ex}
+
+ 
+%% Adjust the vertical spacing between the main text and the notes,
+%% and between successive notes if they are not single-spaced.
+\setlength{\skip\footins}{.75\baselineskip}
+% 
+%% \flushbottom looks silly with lots of extra space between paragraphs
+%% better to put the "extra" space at the bottom of the page!
+\raggedbottom
+% 
+%% Default page style.
+\pagestyle{tcplain}
+\setfrontpagestyle{tcplain}
+\setbodypagestyle{tcplain}
+\setbackpagestyle{tcplain}
+
+\AtBeginDocument{\protect{\setcounter{secnumdepth}{0}}}
+
+\renewenvironment{table}
+{\setlength\abovecaptionskip{6\p@}%
+  \setlength\belowcaptionskip{2\p@}%
+  \@float{table}}
+{\end@float}
+
+\renewenvironment{figure}
+{\setlength\abovecaptionskip{2\p@}%
+  \setlength\belowcaptionskip{6\p@}%
+  \@float{figure}}
+{\end@float}
+
+% ========================= %
+%       Contents Pages      %
+% ========================= %
 % 
 %% All this junk is for handling the spacing in the TOC, LOF, and LOT.
 % 
@@ -944,7 +1077,7 @@
     \pagestyle{continued}
 
     % Setup header spacing
-    \expandafter\newgeometry\expandafter{\marginprel}
+    \expandafter\newgeometry\expandafter{\marginlist}
     
     % Header on first page
     \thispagestyle{firstpage}
@@ -982,7 +1115,7 @@
     \pagestyle{continued}
 
     % Setup header spacing
-    \expandafter\newgeometry\expandafter{\marginprel}
+    \expandafter\newgeometry\expandafter{\marginlist}
     
     % Header on first page
     \thispagestyle{firstpage}
@@ -1022,7 +1155,7 @@
       \pagestyle{continued}
 
       % Setup header spacing
-      \expandafter\newgeometry\expandafter{\marginprel}
+      \expandafter\newgeometry\expandafter{\marginlist}
       
       % Header on first page
       \thispagestyle{firstpage}
@@ -1084,25 +1217,24 @@
 
 % Preamble headings
 \newcommand\tochead[1]{%
-  \normalfont\centering\uppercase{#1}\\[1em]
-  ~~\\[1.5em]
+  \normalfont\centering\uppercase{#1}%
 }%
 
 % LOT, LOF, LOA
 \newcommand\listhead[2]{%
-  \normalfont\centering\uppercase{#1}\\[1em]
-  #2\hfill Page\\[1.5em]
+  \normalfont\centering\uppercase{#1}\\~\\%
+  #2\hfill Page
 }%
 
 
 % First page - pagestyle
 \def\ps@firstpage{%
   \def\@oddhead{
-    \parbox[t]{\textwidth}{%
-      \begin{singlespaced}%
-        \hfil\thepage\hfil\\~\\%
+    \parbox[t]{0.99\linewidth}{%
+      \begin{doublespaced}%
+        \hfil\thepage\hfil\\%
         \firheadmark%
-      \end{singlespaced}%
+      \end{doublespaced}%
     }%
   }
   \let\@evenhead\@oddhead
@@ -1111,11 +1243,11 @@
 % Continued pages - pagestyle
 \def\ps@continued{%
   \def\@oddhead{
-    \parbox[t]{\textwidth}{%
-      \begin{singlespaced}%
-        \hfil\thepage\hfil\\~\\%
+    \parbox[t]{0.99\linewidth}{%
+      \begin{doublespaced}%
+        \hfil\thepage\hfil\\%
         \conheadmark%
-      \end{singlespaced}%
+      \end{doublespaced}%
     }%
   }
   \let\@evenhead\@oddhead
@@ -1123,6 +1255,7 @@
 
 % Call \contents to get all the lists and tables done. 
 \newcommand{\contents}{%
+  \typeout{***************** Contents ******************}
   \newpage
   % Set contents title spacing
   \newlinestretch{\@spacing}
@@ -1770,137 +1903,5 @@
 }
 
 
-%%%%%% Page Styles
-% 
-% redefinition of tcplain to meet MSU requirements (top center page numbering)
-\if@twoside % if two-sided printing
-\newcommand{\ps@tcplain}{%
-  \@tcpagetrue%
-  \let\@mkboth\markboth%
-  \def\@oddfoot{%
-    \if@draft%
-    \blDRAFT\hfil%
-    {\slshape\small\today}\hfil\brDRAFT%
-    \fi%
-  }%
-  \let\@evenfoot\@oddfoot%
-  \def\@oddhead{%
-    \if@draft\tlDRAFT\fi%
-    \hfil\thepage\hfil%
-    \if@draft\trDRAFT\fi%
-  }%
-  \def\@evenhead{%
-    \if@draft\tlDRAFT\fi%
-    \hfil\thepage\hfil%
-    \if@draft\trDRAFT\fi%
-  }%
-}%ps@tcplain
-\else % if one-sided printing
-\newcommand{\ps@tcplain}{%
-  \@tcpagetrue%
-  \let\@mkboth\markboth%
-  \def\@oddfoot{%
-    \if@draft%
-    \blDRAFT\hfil%
-    {\slshape\small\today}\hfil\brDRAFT%
-    \fi%
-  }%
-  \def\@oddhead{%
-    \if@draft\tlDRAFT\fi%
-    \hfil\thepage\hfil%
-    \if@draft\trDRAFT\fi%
-  }%
-}%ps@tcplain
-\fi % @twoside
-
-  
-% ================================= %
-% Section titles format and spacing %
-% ================================= %
-\RequirePackage{titlesec}
-\RequirePackage[normalem]{ulem}
-\RequirePackage{fmtcount}
-% \titlespacing{<command>}{left}{before-sep}{after-sep}
-\if@altchapter
-  \titleformat{name=\chapter}[display]{\centering}{CHAPTER \NUMBERstringnum{\thechapter}}{2ex}{\uppercase}
-\else
-  \titleformat{\chapter}{\centering\uppercase}{}{0pt}{}
-\fi
-\titlespacing*{\chapter}{0pt}{-24pt}{*3}
-\titlespacing{\section}{0pt}{*3}{*3}
-\titlespacing{\subsection}{0pt}{*3}{0pt}
-\titlespacing{\subsubsection}{0pt}{*3}{1ex}
-
-% \titleformat{command}[shape]{format}{label}{sep}{before}[after]
-\titleformat{\section}[hang]{\centering}{\thesection}{0em}{\uline}
-\titleformat{\subsection}[hang]{}{\thesection}{0em}{\uline}[]
-\titleformat{\subsubsection}[runin]{}{\thesection}{0em}{\indent\uline}
-
-% Long subsection title command
-\newcommand{\longsubsection}[3][]{%
-  \ifthenelse{\equal{#1}{}}{\subsection[#2\ #3]{}}{\subsection[#1]{}}%
-  \vspace{-2em}
-  \noindent{#2}\\[-1em]\uline{#3}\par
-}%
-
-% Indent after titles
-\RequirePackage{indentfirst}
 
 
-% ========================= %
-%       Document Layout     %
-% ========================= %
-
-% Default line spacing: use current setting from options.
-\linespacing{\@thesislnsp}
-
-%% Default indent
-\setlength\parindent{5ex}
-
-% 
-%% Page layout based on marginsize option using geometry package
-
-\ifcase\@marginsize 
-% set narrow margins
-\def\margingeom{inner=1.25in,outer=0.75in,top=1.25in,bottom=0.75in}
-\or 
-% set normal margins
-\def\margingeom{inner=1.5in,outer=1.0in,top=1.5in,bottom=1.0in}
-\def\marginprel{inner=1.5in,outer=1.0in,top=2.125in,bottom=1.0in,headsep=1in} \or 
-% set wide margins
-\def\margingeom{inner=1.5in,outer=1.0in,top=2.0in,bottom=1.0in}
-\or
-% set extra wide margins: 1 1/2"" all around
-\def\margingeom{inner=1.5in,outer=1.5in,top=2.0in,bottom=1.5in}
-\fi%@marginsize
-\RequirePackage[\margingeom]{geometry}
-
- 
-%% Adjust the vertical spacing between the main text and the notes,
-%% and between successive notes if they are not single-spaced.
-\setlength{\skip\footins}{.75\baselineskip}
-% 
-%% \flushbottom looks silly with lots of extra space between paragraphs
-%% better to put the "extra" space at the bottom of the page!
-\raggedbottom
-% 
-%% Default page style.
-\pagestyle{tcplain}
-\setfrontpagestyle{tcplain}
-\setbodypagestyle{tcplain}
-\setbackpagestyle{tcplain}
-
-
-\AtBeginDocument{\protect{\setcounter{secnumdepth}{0}}}
-
-\renewenvironment{table}
-{\setlength\abovecaptionskip{6\p@}%
-  \setlength\belowcaptionskip{2\p@}%
-  \@float{table}}
-{\end@float}
-
-\renewenvironment{figure}
-{\setlength\abovecaptionskip{2\p@}%
-  \setlength\belowcaptionskip{6\p@}%
-  \@float{figure}}
-{\end@float}
