@@ -769,40 +769,9 @@
     \if@draft\trDRAFT\fi%
   }%
 }%ps@tcplain
-\fi % @twoside
+\fi % @twoside 
 
   
-% ================================= %
-% Section titles format and spacing %
-% ================================= %
-\RequirePackage{titlesec}
-\RequirePackage[normalem]{ulem}
-\RequirePackage{fmtcount}
-% \titlespacing{<command>}{left}{before-sep}{after-sep}
-\if@altchapter
-  \titleformat{name=\chapter}[display]{\centering}{CHAPTER \NUMBERstringnum{\thechapter}}{2ex}{\uppercase}
-\else
-  \titleformat{\chapter}{\centering\uppercase}{}{0pt}{}
-\fi
-\titlespacing*{\chapter}{0pt}{-24pt}{*3}
-\titlespacing{\section}{0pt}{*3}{*3}
-\titlespacing{\subsection}{0pt}{*3}{0pt}
-\titlespacing{\subsubsection}{0pt}{*3}{1ex}
-
-% \titleformat{command}[shape]{format}{label}{sep}{before}[after]
-\titleformat{\section}[hang]{\centering}{\thesection}{0em}{\uline}
-\titleformat{\subsection}[hang]{}{\thesection}{0em}{\uline}[]
-\titleformat{\subsubsection}[runin]{}{\thesection}{0em}{\indent\uline}
-
-% Long subsection title command
-\newcommand{\longsubsection}[3][]{%
-  \ifthenelse{\equal{#1}{}}{\subsection[#2\ #3]{}}{\subsection[#1]{}}%
-  \vspace{-2em}
-  \noindent{#2}\\[-1em]\uline{#3}\par
-}%
-
-% Indent after titles
-\RequirePackage{indentfirst}
 
 % ========================= %
 %       Document Layout     %
@@ -855,7 +824,11 @@
 \setbodypagestyle{tcplain}
 \setbackpagestyle{tcplain}
 
-\AtBeginDocument{\protect{\setcounter{secnumdepth}{0}}}
+\if@altchapter
+  \AtBeginDocument{\protect{\setcounter{secnumdepth}{4}}}
+\else
+  \AtBeginDocument{\protect{\setcounter{secnumdepth}{0}}}
+\fi
 
 \renewenvironment{table}
 {\setlength\abovecaptionskip{6\p@}%
@@ -1034,9 +1007,15 @@
 \renewcommand*\l@section{%
   \let\MT@@toclineskip=\MT@beforesecskip@value
   \MT@dottedtocline{1}{1.6em}{1.8em}} %was 2.0em and 2.3em, 13apr2008
-\renewcommand*\l@subsection{%
-  \let\MT@@toclineskip=\MT@beforesubsecskip@value
-  \MT@dottedtocline{2}{3.8em}{2.0em}} %was 4.3em and 3.2 em, 13apr2008
+\if@altchapter
+  \renewcommand*\l@subsection{%
+    \let\MT@@toclineskip=\MT@beforesubsecskip@value
+    \MT@dottedtocline{2}{3.8em}{2.8em}} %was 4.3em and 3.2 em, 13apr2008
+\else
+  \renewcommand*\l@subsection{%
+    \let\MT@@toclineskip=\MT@beforesubsecskip@value
+    \MT@dottedtocline{2}{3.8em}{2.0em}} %was 4.3em and 3.2 em, 13apr2008
+\fi
 \renewcommand*\l@subsubsection{%
   \let\MT@@toclineskip=\MT@beforesubsubsecskip@value
   \MT@dottedtocline{3}{6.0em}{3.0em}} %was 7.5em & 4.1em, 13apr2008
@@ -1432,18 +1411,18 @@
 % 
 %% The actual guts of the chapter heading routines
 % 
-\renewcommand{\chapter}{%
-  \if@openright\cleardoublepage\else\clearpage\fi
-  \if@tcpage% DO NOT use the \front@pagestyle macro here.
-  {\thispagestyle{tcplain}}
-  \else
-  {\thispagestyle{plain}} %
-  \fi 
-  \settocdepth{\chapapp@tocdepth}
-  \global\@topnum\z@
-  \@afterindenttrue
-  \secdef\@chapter\@schapter
-}
+% \renewcommand{\chapter}{%
+%   \if@openright\cleardoublepage\else\clearpage\fi
+%   \if@tcpage% DO NOT use the \front@pagestyle macro here.
+%   {\thispagestyle{tcplain}}
+%   \else
+%   {\thispagestyle{plain}} %
+%   \fi 
+%   \settocdepth{\chapapp@tocdepth}
+%   \global\@topnum\z@
+%   \@afterindenttrue
+%   \secdef\@chapter\@schapter
+% }
 
 %% TOC chapter headings
 \def\chap@chapter[#1]#2{%
@@ -1493,7 +1472,62 @@
   }
 }
 
+% ================================= %
+% Section titles format and spacing %
+% ================================= %
+\RequirePackage{titlesec}
+\RequirePackage[normalem]{ulem}
+\RequirePackage{fmtcount}
+% \titlespacing{<command>}{left}{before-sep}{after-sep}
+% \titleformat{command}[shape]{format}{label}{sep}{before}[after]
 
+\if@altchapter % Alternative titles
+  \typeout{Using Alternative Titles}
+
+  \titlespacing{\chapter}{0pt}{0pt}{*3}
+  \titlespacing{\section}{0pt}{*3}{*3}
+  \titlespacing{\subsection}{0pt}{*3}{0pt}
+  \titlespacing{\subsubsection}{0pt}{*3}{1ex}
+  \titleformat{\chapter}[display]{\centering}{CHAPTER \NUMBERstringnum{\thechapter}}{2ex}{\uppercase}
+  \titleformat{\section}[hang]{\centering}{\uline{\thesection\hspace*{0.5em}}}{0em}{\uline}
+  \titleformat{\subsection}[hang]{}{\uline{\thesubsection\hspace*{0.5em}}}{0em}{\uline}
+  \titleformat{\subsubsection}[runin]{}{\indent{\uline{\thesubsubsection\hspace*{0.5em}}}}{0em}{\uline}
+
+  % Long subsection title command
+  \newcommand{\longsubsection}[3][]{%
+    \addtocounter{subsection}{1}%
+    \ifthenelse{\equal{#1}{}}%
+      {\addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#2\\ #3}}
+      {\addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1}}
+    \begin{singlespace}
+      \noindent\thesubsection\hspace*{0.5em}#2\\\uline{#3}\par%
+    \end{singlespace}
+  }%
+\else % Standard titles
+
+  \titlespacing*{\chapter}{0pt}{-24pt}{*3}
+  \titlespacing{\section}{0pt}{*3}{*3}
+  \titlespacing{\subsection}{0pt}{*3}{0pt}
+  \titlespacing{\subsubsection}{0pt}{*3}{1ex}
+  \titleformat{\chapter}{\centering\uppercase}{}{0pt}{}
+  \titleformat{\section}[hang]{\centering}{}{0em}{\uline}
+  \titleformat{\subsection}[hang]{}{}{0em}{\uline}[]
+  \titleformat{\subsubsection}[runin]{}{}{0em}{\indent\uline}
+
+  % Long subsection title command
+  \newcommand{\longsubsection}[3][]{%
+    \addtocounter{subsection}{1}%
+    \ifthenelse{\equal{#1}{}}%
+      {\addcontentsline{toc}{subsection}{#2\\ #3}}
+      {\addcontentsline{toc}{subsection}{#1}} 
+    \begin{singlespace}
+      \noindent#2\\\uline{#3}\par%
+    \end{singlespace}
+  }%
+\fi
+
+% Indent after titles
+\RequirePackage{indentfirst}
 
 %% formatting of items before main body of text
 \newenvironment{preliminary}%
