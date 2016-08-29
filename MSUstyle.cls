@@ -842,6 +842,12 @@
   \@float{figure}}
 {\end@float}
 
+\renewenvironment{algorithm}
+{\setlength\abovecaptionskip{2\p@}%
+  \setlength\belowcaptionskip{6\p@}%
+  \@float{algorithm}}
+{\end@float}
+
 % ========================= %
 %       Contents Pages      %
 % ========================= %
@@ -1031,10 +1037,8 @@
   \MT@dottedtocline{1}{1.5em}{3.0em}}% this is indented 1.5em so that 
 % if you wish, you can add 'Figure' header
 % centered above the numbers using \addtocontents
-\renewcommand*\l@table{%
-  \let\MT@@toclineskip=\MT@beforetableskip@value
-  \MT@dottedtocline{1}{1.5em}{2.3em}}% ditto
-
+\let\l@table\l@figure % Same for table and algorithm
+\let\l@algorithm\l@figure
 \newlength{\MT@tmpa}
 
 
@@ -1044,7 +1048,7 @@
   \if@openright\cleardoublepage\else\clearpage\fi 
   % must clear page here, so that phantomsection\addcontentsline is on the correct page
   \phantomsection%
-  \pdfbookmark[1]{\lotpdfbookmarkstring}{some Tables}%
+  \pdfbookmark[1]{\lotpdfbookmarkstring}{Tables}%
   \settoheight{\MT@tmpa}{A}
   \set@MTtocskip{\MT@tmpa}
   {\newlinestretch{1}
@@ -1082,7 +1086,7 @@
   \if@openright\cleardoublepage\else\clearpage\fi 
   % must clear page here, so that phantomsection\addcontentsline is on the correct page
   \phantomsection%
-  \pdfbookmark[1]{\lofpdfbookmarkstring}{figas}%
+  \pdfbookmark[1]{\lofpdfbookmarkstring}{Figures}%
   \settoheight{\MT@tmpa}{A}
   \set@MTtocskip{\MT@tmpa}
   {\newlinestretch{1}
@@ -1115,47 +1119,44 @@
   \fi
 }
 
-
 \newcommand{\do@algorithmspage}{%
   \ifalgorithmspage
   \if@openright\cleardoublepage\else\clearpage\fi 
+
   % must clear page here, so that phantomsection\addcontentsline is on the correct page
   \phantomsection%
-  \pdfbookmark[1]{\loapdfbookmarkstring}{algores}%
+  \pdfbookmark[1]{\loapdfbookmarkstring}{Algorithms}%
   \settoheight{\MT@tmpa}{A}
   \set@MTtocskip{\MT@tmpa}
-  {\newlinestretch{1}
-    \begin{doublespaced} %ensure double spacing for list of algorithms
-      % Define headers
-      \def\firheadmark{\listhead{List of Algorithms}{Algorithm}}
-      \def\conheadmark{\listhead{List of Algorithms - Continued}{Algorithm}}
+ % {\newlinestretch{1}
+    % Define headers
+    \def\conheadmark{\listhead{List of Algorithms - Continued}{Algorithm}}
+    \def\firheadmark{\listhead{List of Algorithm}{Algorithm}}
 
-      % Set pagestyle to continued
-      \pagestyle{continued}
+    % Set pagestyle to continued
+    \pagestyle{continued}
 
-      % Setup header spacing
-      \expandafter\newgeometry\expandafter{\marginlist}
-      
-      % Header on first page
-      \thispagestyle{firstpage}
+    % Setup header spacing
+    \expandafter\newgeometry\expandafter{\marginlist}
+    
+    % Header on first page
+    \thispagestyle{firstpage}
 
-      % List of Algoriths
-      \newlinestretch{1.0}%
-      \@starttoc{loa}
+    % List of Figures
+    \newlinestretch{1.0}%
+    \@starttoc{loa}
 
-      % End of list
-      \clearpage
-      
-      % Remove header spacing & reset pagestyle
-      \restoregeometry
-      \pagestyle{\front@pagestyle}
-      
-    \end{doublespaced}
-  }
+    % End of list
+    \clearpage
+    
+    % Remove header spacing & reset pagestyle
+    \restoregeometry
+    \pagestyle{\front@pagestyle}
+
+  %}
   \newpage
   \fi
 }
-
 
 \newcommand{\do@contentspage}{%
   \ifcontentspage
