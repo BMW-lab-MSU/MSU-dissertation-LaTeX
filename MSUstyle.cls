@@ -1411,19 +1411,19 @@
 }
 % 
 %% The actual guts of the chapter heading routines
-% 
-% \renewcommand{\chapter}{%
-%   \if@openright\cleardoublepage\else\clearpage\fi
-%   \if@tcpage% DO NOT use the \front@pagestyle macro here.
-%   {\thispagestyle{tcplain}}
-%   \else
-%   {\thispagestyle{plain}} %
-%   \fi 
-%   \settocdepth{\chapapp@tocdepth}
-%   \global\@topnum\z@
-%   \@afterindenttrue
-%   \secdef\@chapter\@schapter
-% }
+
+\renewcommand{\chapter}{%
+  \if@openright\cleardoublepage\else\clearpage\fi
+  \if@tcpage% DO NOT use the \front@pagestyle macro here.
+  {\thispagestyle{tcplain}}
+  \else
+  {\thispagestyle{plain}} %
+  \fi 
+  \settocdepth{\chapapp@tocdepth}
+  \global\@topnum\z@
+  \@afterindenttrue
+  \secdef\@chapter\@schapter
+}
 
 %% TOC chapter headings
 \def\chap@chapter[#1]#2{%
