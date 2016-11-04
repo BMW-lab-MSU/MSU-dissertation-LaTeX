@@ -1504,6 +1504,18 @@
       \noindent\thesubsection\hspace*{0.5em}#2\\\uline{#3}\par%
     \end{singlespace}
   }%
+
+  % Long subsubsection title command
+  \newcommand{\longsubsubsection}[3][]{%
+    \addtocounter{subsubsection}{1}%
+    \ifthenelse{\equal{#1}{}}%
+      {\addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#2\\ #3}}
+      {\addcontentsline{toc}{subsubsection}{\protect\numberline{\thesubsubsection}#1}}
+    \begin{singlespace}
+      \noindent\thesubsubsection\hspace*{0.5em}#2\\\uline{#3}\par%
+    \end{singlespace}
+  }%
+
 \else % Standard titles
 
   \titlespacing*{\chapter}{0pt}{-24pt}{*3}
@@ -1521,6 +1533,17 @@
     \ifthenelse{\equal{#1}{}}%
       {\addcontentsline{toc}{subsection}{#2\\ #3}}
       {\addcontentsline{toc}{subsection}{#1}} 
+    \begin{singlespace}
+      \noindent#2\\\uline{#3}\par%
+    \end{singlespace}
+  }%
+
+  % Long subsubsection title command
+  \newcommand{\longsubsubsection}[3][]{%
+    \addtocounter{subsubsection}{1}%
+    \ifthenelse{\equal{#1}{}}%
+     {\addcontentsline{toc}{subsubsection}{#2\\ #3}}
+     {\addcontentsline{toc}{subsubsection}{#1}} 
     \begin{singlespace}
       \noindent#2\\\uline{#3}\par%
     \end{singlespace}
