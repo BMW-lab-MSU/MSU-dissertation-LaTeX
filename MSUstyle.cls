@@ -930,7 +930,7 @@
   \ifnum \c@secnumdepth > \m@ne
   \refstepcounter{chapter}%
   \protect{\addcontentsline{toc}{chapter}{\texorpdfstring%
-      {\hspace{0.30in}\MakeUppercase{\@chapapp}\space\protect\numberline{\thechapter}\hspace{-0.18in} : \space#1 \vspace{-0.15in}}%
+      {\hspace{0.15in}\MakeUppercase{\@chapapp}\space\protect\numberline{\thechapter}\hspace{-0.18in} : \space#1 \vspace{-0.15in}}%
       {APPENDIX\space\thechapter : \space#1}}% end addcontentsline
   } %end protect
   \else
@@ -1010,21 +1010,34 @@
   }%
   \fi}
 
-\renewcommand*\l@section{%
+% TOC spacing before (and after number if it exists)
+\if@altchapter % Alt tiltes (with numbers)
+  \renewcommand*\l@section{%
   \let\MT@@toclineskip=\MT@beforesecskip@value
-  \MT@dottedtocline{1}{1.6em}{1.8em}} %was 2.0em and 2.3em, 13apr2008
-\if@altchapter
+  \MT@dottedtocline{1}{1em}{2.1em}}
+
   \renewcommand*\l@subsection{%
     \let\MT@@toclineskip=\MT@beforesubsecskip@value
-    \MT@dottedtocline{2}{3.8em}{2.8em}} %was 4.3em and 3.2 em, 13apr2008
-\else
-  \renewcommand*\l@subsection{%
-    \let\MT@@toclineskip=\MT@beforesubsecskip@value
-    \MT@dottedtocline{2}{3.8em}{2.0em}} %was 4.3em and 3.2 em, 13apr2008
-\fi
-\renewcommand*\l@subsubsection{%
+    \MT@dottedtocline{2}{2.7em}{2.8em}}
+
+  \renewcommand*\l@subsubsection{%
   \let\MT@@toclineskip=\MT@beforesubsubsecskip@value
-  \MT@dottedtocline{3}{6.0em}{3.0em}} %was 7.5em & 4.1em, 13apr2008
+  \MT@dottedtocline{3}{4.9em}{3.0em}}
+
+\else % Standard titles (no numbers)
+  \renewcommand*\l@section{%
+  \let\MT@@toclineskip=\MT@beforesecskip@value
+  \MT@dottedtocline{1}{1.6em}{1.8em}}
+
+  \renewcommand*\l@subsection{%
+  \let\MT@@toclineskip=\MT@beforesubsecskip@value
+  \MT@dottedtocline{2}{3.8em}{2.0em}}
+
+  \renewcommand*\l@subsubsection{%
+  \let\MT@@toclineskip=\MT@beforesubsubsecskip@value
+  \MT@dottedtocline{3}{6.0em}{3.0em}}
+\fi
+
 \renewcommand*\l@paragraph{%
   \let\MT@@toclineskip=\MT@beforeparaskip@value
   \MT@dottedtocline{4}{10.5em}{5em}}
