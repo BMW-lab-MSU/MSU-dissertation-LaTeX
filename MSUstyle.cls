@@ -1061,7 +1061,7 @@
   \if@openright\cleardoublepage\else\clearpage\fi 
   % must clear page here, so that phantomsection\addcontentsline is on the correct page
   \phantomsection%
-  \pdfbookmark[1]{\lotpdfbookmarkstring}{Tables}%
+  \pdfbookmark[0]{\lotpdfbookmarkstring}{Tables}%
   \settoheight{\MT@tmpa}{A}
   \set@MTtocskip{\MT@tmpa}
   {\newlinestretch{1}
@@ -1099,7 +1099,7 @@
   \if@openright\cleardoublepage\else\clearpage\fi 
   % must clear page here, so that phantomsection\addcontentsline is on the correct page
   \phantomsection%
-  \pdfbookmark[1]{\lofpdfbookmarkstring}{Figures}%
+  \pdfbookmark[0]{\lofpdfbookmarkstring}{Figures}%
   \settoheight{\MT@tmpa}{A}
   \set@MTtocskip{\MT@tmpa}
   {\newlinestretch{1}
@@ -1138,7 +1138,7 @@
 
   % must clear page here, so that phantomsection\addcontentsline is on the correct page
   \phantomsection%
-  \pdfbookmark[1]{\loapdfbookmarkstring}{Algorithms}%
+  \pdfbookmark[0]{\loapdfbookmarkstring}{Algorithms}%
   \settoheight{\MT@tmpa}{A}
   \set@MTtocskip{\MT@tmpa}
  % {\newlinestretch{1}
@@ -1155,7 +1155,7 @@
     % Header on first page
     \thispagestyle{firstpage}
 
-    % List of Figures
+    % List of Algorithms
     \newlinestretch{1.0}%
     \@starttoc{loa}
 
@@ -1194,7 +1194,7 @@
     \newlinestretch{1.0}%
     \thispagestyle{firstpage}
 
-    % List of Figures
+    % Table of Contents
     \@starttoc{toc}
 
     % End of list
