@@ -271,6 +271,10 @@
 \newif\if@altchapter
 \@altchapterfalse % initially false by default
 
+%% Switch for multiple appendices
+\newif\ifAppendmultiple
+\Appendmultiplefalse % initially false by default
+
 %% Because of the draft option, and to allow users to override
 %% defaults, we don't want to be passing conflicting options back to
 %% the report class, so we define our own temporary toggles holding
@@ -351,6 +355,8 @@
   \newif\ifnumreset
   \numresettrue
 }
+
+\DeclareOption{appendmultiple}{\Appendmultipletrue}
 
 
 %% All other options are passed to the base class directly.
@@ -902,16 +908,18 @@
 
 
 \renewcommand{\appendix}{%
-  \if@openright
-  \cleardoublepage
-  \else
-  \clearpage
+  \ifAppendmultiple
+    \if@openright
+      \cleardoublepage
+      \else
+      \clearpage
+    \fi
+    \quad \vspace{2.5in}
+    \begin{center}
+      APPENDICES
+    \end{center}
+    \vfill \quad
   \fi
-  \quad \vspace{2.5in}
-  \begin{center}
-    APPENDICES
-  \end{center}
-  \vfill \quad
   \renewcommand{\@chapapp}{\MakeUppercase{\appendixname}}
   \thispagestyle{tcplain}%    Do NOT use the \back@pagestyle macro here
   \settocdepth{\appendix@tocdepth}
@@ -923,14 +931,17 @@
   \def\chapapp@schapter{\app@schapter}
   \renewcommand{\thesection}{\thechapter.\@arabic\c@section}
   \phantomsection%
+  \ifAppendmultiple
   \protect{\addcontentsline{toc}{chapter}{APPENDICES}}
+  \fi
 }
 
+\ifAppendmultiple
 \def\app@chapter[#1]#2{%
   \ifnum \c@secnumdepth > \m@ne
   \refstepcounter{chapter}%
   \protect{\addcontentsline{toc}{chapter}{\texorpdfstring%
-      {\hspace{0.15in}\MakeUppercase{\@chapapp}\space\protect\numberline{\thechapter}\hspace{-0.18in} : \space#1 \vspace{-0.15in}}%
+      {\hspace{0.25in}\MakeUppercase{\@chapapp}\space\protect\numberline{\thechapter}\hspace{-0.18in} : \space#1}%
       {APPENDIX\space\thechapter : \space#1}}% end addcontentsline
   } %end protect
   \else
@@ -943,10 +954,33 @@
   \@makeapphead{#2}%
   \@afterheading
   \fi
-  \vfill \quad
-  \clearpage
+  %\vfill \quad
+  %\clearpage
 }
+\else % Only 1 appendix -> no indent in TOC
+\def\app@chapter[#1]#2{%
+  \ifnum \c@secnumdepth > \m@ne
+  \refstepcounter{chapter}%
+  \protect{\addcontentsline{toc}{chapter}{\texorpdfstring%
+      {\MakeUppercase{\@chapapp}: \space#1 \vspace{-0.18in}}%
+      {APPENDIX: \space#1}}% end addcontentsline
+  } %end protect
+  \else
+  \addcontentsline{toc}{section}{\MakeUppercase{#1}}%
+  \fi
+  \protect{\chaptermark{#1}}%
+  \if@twocolumn
+  \@topnewpage[\@makeapphead{#2}]%
+  \else
+  \@makeapphead{#2}%
+  \@afterheading
+  \fi
+  %\vfill \quad
+  %\clearpage
+}
+\fi
 
+\ifAppendmultiple
 \def\@makeapphead#1{%
   { \parindent \z@ \raggedright \normalfont
     \quad \vfill
@@ -956,8 +990,17 @@
     \interlinepenalty\@M
     \centering \MakeUppercase{#1}\par\nobreak
     \vfill \quad
+    \clearpage
   }
 }
+\else
+\def\@makeapphead#1{%
+  { %\parindent \z@ \raggedright \normalfont
+    \centering\underline{\MakeUppercase{\appendixname}: \MakeUppercase{#1}}
+    \vskip 30\p@  %\vskip 0.3in
+  }
+}
+\fi
 
 \setappendixtocdepth{0}
 \renewcommand\@dotsep{0.2} %%dot separation in TOC, LOT, LOF and LOA
@@ -1929,6 +1972,7 @@
 \renewenvironment{thebibliography}[1]{
   {%
     \ifAppend
+    \ifAppendmultiple
     \if@openright
     \cleardoublepage
     \else
@@ -1945,6 +1989,10 @@
     \else
     \clearpage
     \fi
+    \else %there is only one appendix so put \refname on same page
+    \centering\underline{\MakeUppercase{\refname}}
+    \vskip 30\p@  %\vskip 0.3in
+    \fi %end ifAppendmultiple
     \else  %there is no appendix so put \refname on same page
     \centering\underline{\MakeUppercase{\refname}}
     \vskip 30\p@  %\vskip 0.3in

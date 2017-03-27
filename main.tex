@@ -22,8 +22,11 @@
 % use \documentclass[thesis]{MSUstyle} to adjustment the front matter according to DGE style rules that
 % are different for a thesis than for a dissertation.
 %
-% options 10pt, singlespaced and draft allow you to require less number of pages for editing
+% options 10pt, singlespaced, and draft allow you to require less number of pages for editing
 %
+% option altchapter provides numbered chapter and section titles
+%
+% option appendmultiple is required if you have multiple appendices
 
 % ========================= %
 %         Packages          %
@@ -170,7 +173,8 @@
 
 \appendix % put appendix chapters here.
 \include{appendixa}
-\include{appendixb}
+% the option appendmultiple is required in your document class if you have multiple appendices!
+% \include{appendixb}
 
 \end{document}
 % do not put anything after this
