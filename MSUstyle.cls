@@ -1,18 +1,4 @@
-%% 
-%% Edited by Raymond Weber, Spring/Summer 2014 to update to better match the 
-%% current MSU formatting requirements.
-%% 
-%% The requred "-- Continued" on subsequent pages of the "Table of Contents"
-%% and "List of Figure" is not automatic in this version.  To add it manually:
-%% 
-%% 1) Add a \nofiles to the top of the top level MYmsuETD.tex
-%% 2) Compile the document and figure on between which lines a newpage and "... -- Coninued" should be added
-%% 3) Open the MYmsuETD.toc (Contents) .lof (Figures) and lot (Tables) and add the appropriate line below in the appropriate spot with empty lines above and below
-%% \par \par \vfil \penalty -\@M \write \m@ne {}\vbox {}\penalty -\@Mi \par \hskip 1em\relax \hfill TABLE OF CONTENTS -- CONTINUED \hfill \hskip 1em\relax \hskip 1em\relax \vspace {.2in} \hskip 1em\relax \par 
-%% \par \par \vfil \penalty -\@M \write \m@ne {}\vbox {}\penalty -\@Mi \par \hskip 1em\relax \hfill LIST OF FIGURES -- CONTINUED \hfill \hskip 1em\relax \hskip 1em\relax \hskip 1em\relax \\ Figure \hfill Page \vspace {.15in} 
-%% \par \par \vfil \penalty -\@M \write \m@ne {}\vbox {}\penalty -\@Mi \par \hskip 1em\relax \hfill LIST OF TABLES -- CONTINUED \hfill \hskip 1em\relax \hskip 1em\relax \hskip 1em\relax \\ Table \hfill Page \vspace {.15in} 
-%% 4) Repeat until 2 & 3 until all pages are complete
-%% 
+%% Updated and maintained by Prof. Mark Owkes mark.owkes@montana.edu
 %% 
 %% ---------------------- Origional Header ----------------------------
 %% 
@@ -35,210 +21,10 @@
 %%	CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
 %%	TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
 %%	SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-%% 
-%% 21-Nov-2009: Changed the spacing after Chapter headings to better match 
-%% DGE requirements of triple spacing. 
-%% Added new copyright from Creative Commons
-%% 
-%% 20-Oct-2009: DGE approved numbering for figures, equations, algorithms 
-%% and tables like 1,1, 1.2, ... 2,56,2.57, etc. This change is 
-%% implemented as an input parameter to the class. This is the numreset 
-%% option or the nonumreset option. The nonumrest is the default since 
-%% I think most people will want to have numbering like above. 
-%% 
-%% 30-Sep-2009: adjusted title page spacings. Spacing on permissions page, 
-%% acknowledgements and the dedications page. Fixed single spacing in 
-%% abstract as well. 
-%% 
-%% 15-pr-2009: adjusted spacing after subsubsection
-%% 
-%% 04-Apr-2009:  Added \msulongsubsection so that long subsection titles 
-%% can be wrapped onto multiple lines with only the last line being
-%% undelined per DGE layout.
-%% 
-%% 25-Mar-2009: Added open source software MIT license
-%% 
-%% 23-Sep-2008: Fixed pdflatex warning of duplicate page. Users can use 
-%% epstopdf to convert eps figures to pdf, or simply use jpegs. 
-%% 
-%% 23-Jun-2008, very minor changes: added draftver, draft option is now onesided 
-%% by default, changes some bookmark placements, now using plunsrt_url.bst
-%% created by perl script urlbst for DOI/url support inplace of IEEEtran.bst.
-%% see heading in plunsrt_url.bst for more information.
-%% 
-%% 25-Apr-2008, got appendix capitolized, put references title on separate page
-%% if there is appendix. 
-%% 
-%% 21-Apr-2008, extended dots in TOC,LOF,LOT to the pg#s; changed appendix title
-%% spacing. 
-%% 
-%% 18-Apr-2008
-%% changed how section numbering is handled by adding \setcounter{secnumdepth{0}}.
-%% add the usage of varioref package. this allows use of \vref inplace of
-%% \ref. This yields nice results when referring to a figure, section or 
-%% other. The result for this tex code `see figure~\vref{figa}' looks like 
-%% 'see figure 12 on page 15' but that changes dynamically depending on final
-%% layout. I like it better than simply \ref with a \pageref added to it.
-%% 
-%% Updated 14Apr2008 to fix indentations of sections, subsection and subsubsections
-%% in the TOC and in text. Also fixed vertical spacing after chapter headings.
-%% Text after chapter headings and prior to section heading will now 
-%% automatically be indented.
-%% 
-%% Updated in Apr2008 to fix such things as removing section numbering from the TOC 
-%% and text. Correct spacing in aproval page. Get the deparment and degree 
-%% name right. etc. 
-%% 
-%% This was updated in Mar2008 to be used with pdflatex used with the tetex package 
-%% available for linux. It has been used with the MikTex package but that requires
-%% some additional packages. Read all the code below for changes needed to return
-%% back to using latex if you want instead of pdflatex.
-%% 
-%% Another feature added 31Mar2008 is the capability to do a list of algorithms page.
-%% This is needed by many CS or CompE students. Add: \algorithmspagetrue to the
-%% document section immediately after the \bibliographystyle command. the 
-%% list of algorithms page is by default turned off.
-%% The list of algorithms has one problem that has yet to be solved. The spacing
-%% is double spaced and looks just as it should unless the algorithm caption
-%% is long enough to take up more than one line. it looks bad then and I have
-%% yet to find a solution to this. 
-%% 
-%% This MSUstyle.cls class is a direct derivative of the msuthesis.cls created by 
-%% Dr Steve Shaw at Montana State University (2005) for use in creating theses
-%% with the correct styles demanded by the Division of Graduate Education (DGE). 
-%% For msuthesis, Dr. Shaw used a GNU public licensed (GPL'd) thesis class from 
-%% Georgia Tech called gatech-thesis.cls. Because of such this is also offered 
-%% free and under the GPL. I have merged the two class files, greatly simplified 
-%% them and reduced redundant commands. 
-%% 
-%% I also added input options so that this one class
-%% can be used for either a msu styled thesis or a msu styled dissertation.
-%% The differences between msu theses and msu dissertations is the permissions 
-%% page, the use of `Doctor of Philosophy' vs 'Master of Science' and the 
-%% word 'thesis' versus 'dissertation'. 
-%% 
-%% See the example of usage below for more detail on that issue.
-%% 
-%% 
-%% NOTHING!!! in this file should be changed or modified unless the DGE changes 
-%% the required style or format of a submitted thesis or dissertation
-%% 
-%% 
-%% KEEP reading ->
-%% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%% 
-%% Example of use in a file called MYmsuETD.tex or whatever you desire to call it.
-%% one could simply copy this example, then uncomment it and use it.
-%% 
-%% \documentclass[12pt,oneside,doublespaced,normalmargins,dissertation,final]{MSUstyle}
-%%% or \documentclass[11pt,twoside,oneandahalfspaced,normalmargins,thesis,draft]{MSUstyle}
-%%% or variations there on  ... see Option Declaration Section below for more options
-%% 
-%%    % \nofiles
-%% 
-%%%%%%%%%%%%%%%%%%%% Definitions %%%%%%%%%%  
-%% define stuff for dissertation or thesis
-%% change definition of name to your name and keys to key words you want searched 
-%% by the likes of google and such ilk. This information shows up in the pdf file properties
-%% \newcommand{\name}{Yo fullname Candidate} %PUT your full name here
-%% \newcommand{\DocTitle}{Carbon Dioxide Sequestration Monitoring and Verification Via Laser Based 
-%% Detection System}
-%% \degreetitle{Engineering}
-%% \department{Electrical and Computer Engineering}
-%% \committeechair{Dr. So A Ndso}
-%% \departmentchair{Dr. Big E. Head}
-%% \graduatedean{Dr. Bigg E. Ego}
-%% \submitdate{August, 2008}
-%% \copyrightyear{2008} %add one to year if document submitted in Dec.
-%% 
-%% \newcommand{\keys}{Electrical Engineering, PhD, Dissertation, Tunable, Lasers, Laser Diode, DFB, Optics,
-%% Lidar, Carbon Dioxide, CO2, Carbon, Sequestration, CCS, Carbon Storage, Monitor, Verify, Global Warming, 
-%% Montana, Montana State} %put searchable words that you want searched here
-%% 
-%% \bibfiles{gwarm,laser,sequestration,monitor} %your .bib files, files containing bibliographic 
-%% %% information/references that you are going to cite in your ETD.
-%% %% 
-%% 
-%% 
-%% %%%%%%%%%%%%%%%%%%%% Packages and preparations %%%%%%%%%%  
-%% \usepackage{graphicx} %for the \includegraphics command and figures
-%% \usepackage{color} %for changing text color in chapters
-%% \usepackage{subfigure} %to be able to have multiple plots in one figure
-%% \usepackage{listings} %used for formatting code...see appendices
-%% \usepackage{varioref}
-%% \lstset{%set listings styles
-%% language=Matlab, % program language for keywords and comments styles
-%% basicstyle=\tiny, %font size and style
-%% identifierstyle=\color{red}, %variable name style
-%% stringstyle=\ttfamily, %string style
-%% keywordstyle=\color{blue}\bfseries, %language keyword style
-%% commentstyle=\color{green}\itshape, %commentstyle
-%% breaklines=true,  % sets automatic line breaking
-%% breakatwhitespace=false,   %break line not just at whitespaces
-%% } 
-%%   \usepackage[pdftex,
-%%   colorlinks=true,linkcolor=black,citecolor=black,filecolor=black,urlcolor=black,pdftitle={\DocTitle},
-%%   pdfauthor={\name},pdfsubject={\degreetype \ for \name},pdfkeywords={\keys},pdfcreator={PDFLaTex 
-%%   via \name},bookmarks=true,plainpages=false, pdffitwindow=true]{hyperref} %the \  is to give a space
-%%   
-%%   
-%% %%%%%%%%%%%%%%%%%%%%   actual Document %%%%%%%%%%  
-%%   \begin{document}
-%%   \bibliographystyle{IEEEtran.bst} %or use another bibliography style class.
-%%     %%   \algorithmspagetrue %uncomment this line if you desire a ``list of algorithms'' page.
-%%   \begin{preliminary}
-%%     \begin{dedication} %dedication is optional
-%%       I dedicate this sappy work to my ma... %or dedication file name as input
-%%     \end{dedication}
-%%     \begin{acknowledgements}
-%%       I would like to thank... %or appendix file name as input
-%%     \end{acknowledgements}
-%%     \begin{vita} %vita is optional
-%%       I feel I am under valued so I talk about myself here... %or vita file input
-%%     \end{vita}
-%%     
-%%     \begin{singlespaced}
-%%       \contents
-%%     \end{singlespaced}
-%%     
-%%     \begin{abstract}
-%%       \input{abstract} %abstract file name
-%%     \end{abstract}
-%%   \end{preliminary}
-%%   
-%%   \chapter{Introduction} %chapter file name happens to be Introduction.tex
-%%   \chapter{ChTwo} %chapter file name is ChTwo.tex. call it whatever you want.
-%%   \chapter{YetAnotherChapter_YAC} %another chapter file 
-%%   ...
-%%   \chapter{Conclusion}
-%%   
-%%   \begin{postliminary}
-%%     \Appendtrue %comment this out if you have no appendix
-%%     \references
-%%   \end{postliminary}
-%%   
-%%   \appendix
-%%   \input{A_Long_Proof} %appendix file name
-%%   \input{AVery_Long_Proof} %second appendix, appendix file name
-%%   ...
-%% \end{document}
-%% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%%% code section %%%%%
-% do not change anything below unless you know what you are doing.
-
 
 %%%%%%%%%%%% IDENTIFICATION        %%%%%%%%%%%%
-\newcommand{\MSUstyleversion}{1.2}% current version number
-\newcommand{\MSUstyleupdated}{2015/6/9}% date of last change(s)
+\newcommand{\MSUstyleversion}{2.0}% current version number
+\newcommand{\MSUstyleupdated}{2017/6/30}% date of last change(s)
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{MSUstyle}
@@ -249,8 +35,8 @@
 
 
 %%%%%%%%%%%% INITIAL CODE         %%%%%%%%%%%%
-\widowpenalty=19999 % No widows at bottom of page 
-\clubpenalty=19999 % No orphans at top of page 
+\widowpenalty=500 % Try to avoid widows at bottom of page 
+\clubpenalty=1000 % No orphans at top of page 
 \brokenpenalty=999 %no hyphenations at page breaks
 \hyphenpenalty=1000 %no hyphenation at end of lines
 \tolerance=1000 %adjust to make the above penalties tighter or looser 
@@ -271,9 +57,11 @@
 \newif\if@altchapter
 \@altchapterfalse % initially false by default
 
-%% Switch for multiple appendices
+%% Switches for appendices
 \newif\ifAppendmultiple
 \Appendmultiplefalse % initially false by default
+\newif\ifAppendsingle
+\Appendsinglefalse % initially false by default
 
 %% Because of the draft option, and to allow users to override
 %% defaults, we don't want to be passing conflicting options back to
@@ -325,7 +113,9 @@
 \DeclareOption{13pt}{\renewcommand{\@thesisptsz}{13pt}}
 
 %% Number of Page Sides options: change current setting.
-\DeclareOption{twoside}{\renewcommand{\@thesisside}{twoside}}
+\newif\if@twoside
+\@twosidefalse % initially false by default
+\DeclareOption{twoside}{\renewcommand{\@thesisside}{twoside} \@twosidetrue}
 \DeclareOption{oneside}{\renewcommand{\@thesisside}{oneside}}
 
 %% New Chapter Openings options: change current setting.
@@ -356,6 +146,8 @@
   \numresettrue
 }
 
+% Appendix option
+\DeclareOption{appendsingle}{\Appendsingletrue}
 \DeclareOption{appendmultiple}{\Appendmultipletrue}
 
 
@@ -426,9 +218,9 @@
 \newenvironment{singlespaced}%
 {\begin{newspacing}{1}}{\end{newspacing}}
 \newenvironment{oneandahalfspaced}%
-{\begin{newspacing}{1.25}}{\end{newspacing}}
+{\begin{newspacing}{1.5}}{\end{newspacing}}
 \newenvironment{doublespaced}%
-{\begin{newspacing}{1.66}}{\end{newspacing}}
+{\begin{newspacing}{2}}{\end{newspacing}}
 \newenvironment{newspacing}[1]%
 {\par\begingroup\newlinestretch{#1}}%
 {\par\vskip\parskip\vskip\baselineskip\endgroup
@@ -475,13 +267,6 @@
 \renewcommand{\Huge}%
 {\let\currenttextsize=\tmp@Huge\tmp@Huge}
 % 
-
-
-
-\providecommand{\e}[1]{\ensuremath{\times 10^{#1}}} % for doing things like...
-% as output 5x10^3 from latex code: 5\e{3}
-% 
-
 
 %%%%%% Front Matter Parameters
 % 
@@ -612,7 +397,7 @@
 %% Switch for generating a list of tables
 % 
 \newif\ifalgorithmspage
-\algorithmspagefalse % initially true by default
+\algorithmspagetrue % initially true by default
 
 %% Switch for generating a table of contents
 % 
@@ -626,14 +411,8 @@
 
 \newif\ifAppend %if there is no appendix the ref page has different look
 \Appendfalse % initially false by default
-
-%% Switch for relaxing the strict margin requirements 
-%% on the title page and signature page.  Default is to
-%% rigidly adhere to the standard (but that's ugly)
-% 
-\newif\ifstrictmargins
-\strictmarginstrue % initially true by default
-
+\ifAppendsingle \Appendtrue \fi
+\ifAppendmultiple \Appendtrue \fi
 
 %% \settocdepth - use this to change how "deep" to number 
 %% in the table of contents for different sections; e.g.
@@ -836,6 +615,7 @@
   \AtBeginDocument{\protect{\setcounter{secnumdepth}{0}}}
 \fi
 
+\RequirePackage{setspace}
 \renewenvironment{table}
 {\setlength\abovecaptionskip{6\p@}%
   \setlength\belowcaptionskip{2\p@}%
@@ -896,29 +676,25 @@
 }
 \set@MTtocskip{10pt}
 
-\newcommand{\theMTchapter}{\@Roman\c@chapter}
-\renewcommand{\theMTchapter}{\thechapter}
-\renewcommand{\contentsname}{~\\[-0.5em]TABLE OF CONTENTS\vspace{2em}}
-\renewcommand{\listfigurename}{~\\[-0.5em]LIST OF FIGURES \\[1em] Figure \hfill Page}
-\renewcommand{\listtablename}{~\\[-0.5em]LIST OF TABLES \\[1em] Table \hfill Page}
-\renewcommand{\listalgorithmname}{\hspace{1.0in}LIST OF ALGORITHMS \newline Algorithm \hfill Page\vspace{1em}}
-%% the listalgorithmname has the \hspace to center the title as there is no other quick method.
-
-\newcommand{\theHalgorithm}{\arabic{algorithm}} %this provides compatability with the algorithmic package
-
-
 \renewcommand{\appendix}{%
-  \ifAppendmultiple
-    \if@openright
-      \cleardoublepage
-      \else
-      \clearpage
-    \fi
-    \quad \vspace{2.5in}
-    \begin{center}
-      APPENDICES
-    \end{center}
-    \vfill \quad
+  \ifAppendmultiple % Appendices page if multiple appendices
+  \if@openright
+  \cleardoublepage
+  \else
+  \clearpage
+  \fi
+  \quad \vspace{2.5in}\par
+  \begin{center}
+    \MakeUppercase{APPENDICES}
+  \end{center}
+  \thispagestyle{\back@pagestyle}
+  \phantomsection
+  \protect{\addcontentsline{toc}{chapter}{APPENDICES}}
+  \if@openright
+  \cleardoublepage
+  \else
+  \clearpage
+  \fi
   \fi
   \renewcommand{\@chapapp}{\MakeUppercase{\appendixname}}
   \thispagestyle{tcplain}%    Do NOT use the \back@pagestyle macro here
@@ -931,17 +707,15 @@
   \def\chapapp@schapter{\app@schapter}
   \renewcommand{\thesection}{\thechapter.\@arabic\c@section}
   \phantomsection%
-  \ifAppendmultiple
-  \protect{\addcontentsline{toc}{chapter}{APPENDICES}}
-  \fi
 }
 
+% Define TOC Appendix Headings
 \ifAppendmultiple
 \def\app@chapter[#1]#2{%
   \ifnum \c@secnumdepth > \m@ne
   \refstepcounter{chapter}%
-  \protect{\addcontentsline{toc}{chapter}{\texorpdfstring%
-      {\hspace{0.25in}\MakeUppercase{\@chapapp}\space\protect\numberline{\thechapter}\hspace{-0.18in} : \space#1}%
+  \protect{\addcontentsline{toc}{section}{\texorpdfstring%
+      {\MakeUppercase{\@chapapp}\space\protect\numberline{\thechapter}\hspace{-0.18in} : \space#1}%
       {APPENDIX\space\thechapter : \space#1}}% end addcontentsline
   } %end protect
   \else
@@ -962,11 +736,11 @@
   \ifnum \c@secnumdepth > \m@ne
   \refstepcounter{chapter}%
   \protect{\addcontentsline{toc}{chapter}{\texorpdfstring%
-      {\MakeUppercase{\@chapapp}: \space#1 \vspace{-0.18in}}%
+      {\MakeUppercase{\@chapapp}: \space#1}%
       {APPENDIX: \space#1}}% end addcontentsline
   } %end protect
   \else
-  \addcontentsline{toc}{section}{\MakeUppercase{#1}}%
+  \addcontentsline{toc}{chapter}{\MakeUppercase{#1}}%
   \fi
   \protect{\chaptermark{#1}}%
   \if@twocolumn
@@ -980,29 +754,31 @@
 }
 \fi
 
+% Define Appendix heading pages
 \ifAppendmultiple
 \def\@makeapphead#1{%
   { \parindent \z@ \raggedright \normalfont
-    \quad \vfill
-    \centering \underline{\MakeUppercase{\appendixname}\space \thechapter}
+    \quad \vspace{2.5in}\par
+    \begin{center}
+      \underline{\MakeUppercase{\appendixname}\space \thechapter}
+    \end{center}
     \par\nobreak
     \vskip 20\p@
     \interlinepenalty\@M
     \centering \MakeUppercase{#1}\par\nobreak
-    \vfill \quad
     \clearpage
   }
 }
 \else
 \def\@makeapphead#1{%
   { %\parindent \z@ \raggedright \normalfont
-    \centering\underline{\MakeUppercase{\appendixname}: \MakeUppercase{#1}}
+    \centering{\MakeUppercase{\appendixname}: \MakeUppercase{#1}}
     \vskip 30\p@  %\vskip 0.3in
   }
 }
 \fi
 
-\setappendixtocdepth{0}
+\setappendixtocdepth{3}
 \renewcommand\@dotsep{0.2} %%dot separation in TOC, LOT, LOF and LOA
 
 \renewcommand*\l@chapter[2]{% this changes spacings in the TOC
@@ -1088,11 +864,10 @@
   \let\MT@@toclineskip=\MT@beforesubparaskip@value
   \MT@dottedtocline{5}{12.5em}{6em}}
 
+% LOF, LOT, LOA spacing before and after number
 \renewcommand*\l@figure{%
   \let\MT@@toclineskip=\MT@beforefigskip@value
-  \MT@dottedtocline{1}{1.5em}{3.0em}}% this is indented 1.5em so that 
-% if you wish, you can add 'Figure' header
-% centered above the numbers using \addtocontents
+  \MT@dottedtocline{1}{0.5in}{2.0em}}
 \let\l@table\l@figure % Same for table and algorithm
 \let\l@algorithm\l@figure
 \newlength{\MT@tmpa}
@@ -1109,7 +884,7 @@
   \set@MTtocskip{\MT@tmpa}
   {\newlinestretch{1}
     % Define headers
-    \def\conheadmark{\listhead{List of Tables - Continued}{Table}}
+    \def\conheadmark{\listhead{List of Tables -- Continued}{Table}}
     \def\firheadmark{\listhead{List of Tables}{Table}}
 
     % Set pagestyle to continued
@@ -1147,7 +922,7 @@
   \set@MTtocskip{\MT@tmpa}
   {\newlinestretch{1}
     % Define headers
-    \def\conheadmark{\listhead{List of Figures - Continued}{Figure}}
+    \def\conheadmark{\listhead{List of Figures -- Continued}{Figure}}
     \def\firheadmark{\listhead{List of Figures}{Figure}}
 
     % Set pagestyle to continued
@@ -1186,8 +961,8 @@
   \set@MTtocskip{\MT@tmpa}
  % {\newlinestretch{1}
     % Define headers
-    \def\conheadmark{\listhead{List of Algorithms - Continued}{Algorithm}}
-    \def\firheadmark{\listhead{List of Algorithm}{Algorithm}}
+    \def\conheadmark{\listhead{List of Algorithms -- Continued}{Algorithm}}
+    \def\firheadmark{\listhead{List of Algorithms}{Algorithm}}
 
     % Set pagestyle to continued
     \pagestyle{continued}
@@ -1225,7 +1000,7 @@
   {\newlinestretch{1}
     % Define headers
     \def\firheadmark{\tochead{Table of Contents}}
-    \def\conheadmark{\tochead{Table of Contents - Continued}}
+    \def\conheadmark{\tochead{Table of Contents -- Continued}}
 
     % Set pagestyle to continued
     \pagestyle{continued}
@@ -1258,7 +1033,7 @@
 
 % LOT, LOF, LOA
 \newcommand\listhead[2]{%
-  \normalfont\centering\uppercase{#1}\\~\\%
+  \normalfont\centering\uppercase{#1}\\[0.5\baselineskip]%
   #2\hfill Page
 }%
 
@@ -1541,7 +1316,7 @@
 \if@altchapter % Alternative titles
   \typeout{Using Alternative Titles}
 
-  \titlespacing{\chapter}{0pt}{0pt}{*3}
+  \titlespacing{\chapter}{0pt}{-24pt}{*3}
   \titlespacing{\section}{0pt}{*3}{*3}
   \titlespacing{\subsection}{0pt}{*3}{0pt}
   \titlespacing{\subsubsection}{0pt}{*3}{1ex}
@@ -1613,15 +1388,14 @@
 \newenvironment{preliminary}%
 {  
   \newlinestretch{1.0}%
-  \pagenumbering{alph}%
+  %\pagenumbering{alph}%
+  \pagenumbering{roman} 
   \pagestyle{\front@pagestyle}%
   \iftitlepage%
   \maketitle%
   \fi%
 
-  \pagenumbering{roman} 
   \makecopyright
-
 
   \ifsignaturepage%
   \makesignature%
@@ -1655,86 +1429,96 @@
   \begin{titlepage}%
     \phantomsection%
     \pdfbookmark[0]{Titlepage}{title}%
-    \title@top%
-    \title@text% contains a \vfill between \degree and \department
-    \setcounter{page}{1}%
+    % Make titlepage with boxes
+    \begin{center}
+      % Title
+      \mbox{\parbox[t][8em][b]{\textwidth}{%
+          \begin{doublespaced}
+            \centering 
+            \MakeUppercaseWithNewline\@title 
+          \end{doublespaced} }
+      }\\
+      \vspace{2em}
+      % Author
+      \mbox{\parbox[t][4em][t]{\textwidth}{%
+          \begin{doublespaced}
+            \centering 
+            by \\ 
+            \@author 
+          \end{doublespaced} }
+      }\\
+      \vspace{6em}
+      % Degree
+      \mbox{\parbox[t][16em][c]{\textwidth}{%
+          \begin{singlespaced}
+            \centering 
+            A {\degreetype} submitted in partial fulfillment \\
+            of the requirements for the degree \\
+            \quad \\ 
+            \quad \\ 
+            of \\
+            \quad \\ 
+            {\degree}\\
+            \quad \\ 
+            in \\ 
+            \quad \\
+            {\@degreetitle}
+          \end{singlespaced} }
+      }\\
+      \vspace{0em}
+      % University
+      \mbox{\parbox[t][8em][b]{\textwidth}{%
+          \begin{singlespaced}
+            \centering
+            MONTANA STATE UNIVERSITY \\
+            Bozeman, Montana \\ \vspace*{.3in}
+            {\@submitdate}%
+          \end{singlespaced} }
+      }\\
+    \end{center}
   \end{titlepage}% this has a \newpage
   \endgroup%
-  \setcounter{page}{2}%
-  % \pagenumbering{roman} %revert back to roman page numbering for rest of front matter
 }%maketitle
 
-\newcommand{\title@top}{%
-  % make sure that linestretch is already set to 1, and all 
-  % grouping/sectioning commands have already been begun.
-  \ifstrictmargins
-  \vspace*{0.0in} %.5 RW
-  \begin{center}%
-    \begin{doublespaced}%
-      {\expandafter\MakeUppercase{\@title}}\\
-    \end{doublespaced}%
-  \end{center}%
-  \else%
-  \vfill
-  \begin{center}   
-    \begin{doublespaced}
-      {\expandafter\MakeUppercase{\@title}}
-    \end{doublespaced}
-  \end{center}%
-  \fi%
-}
-
-\newcommand{\title@text}{
-  \begin{center}
-    by\\
-    \ \\
-    {{\@author}}\\
-    \vfill 
-    A {\degreetype} submitted in partial fulfillment \\
-    of the requirements for the degree \\
-    \quad \\ 
-    of \\
-    \quad \\ 
-    {\degree}\\
-    \quad \\ 
-    in \\ 
-    \quad \\
-    {\@degreetitle}
-
-    \vfill
-
-    MONTANA STATE UNIVERSITY \\
-    Bozeman, Montana \\ \vspace*{.3in}
-    {\@submitdate}%
-    % \vfill
-  \end{center}
+\newcommand{\MakeUppercaseWithNewline}[1]{%
+  \begingroup
+    \let\SavedOrgNewline\\%
+    \DeclareRobustCommand{\\}{\SavedOrgNewline}%
+    \MakeUppercase{#1}%
+  \endgroup
 }
 
 % Make an MSU approved copyright page
+\usepackage{emptypage} % Avoid page numbers on empty pages
 \newcommand{\makecopyright}{%
   \if@openright\cleardoublepage\else\clearpage\fi 
-  \quad \vspace{0.875in}
   \phantomsection%
   \pdfbookmark[1]{Copyright}{copyright}%
-
-  \begin{center}
-    \begin{doublespaced}
-      \copyright COPYRIGHT 
-
-      by 
-
-      {\@author} 
-
-      {\@copyrightyear} 
-
-      All Rights Reserved
-    \end{doublespaced}
-  \end{center}
-  \vfill
-  % reset page counter.
-  \setcounter{page}{1}
-  \thispagestyle{empty}
-}
+  % Make copyright with boxes (matches spacing on title page)
+    \begin{center}
+      % Title
+      \mbox{\parbox[t][10em][b]{\textwidth}{%  10em = 8em (title) + 2em (space) used above
+          \begin{doublespaced}
+            \centering 
+            \copyright COPYRIGHT 
+          \end{doublespaced} }
+      }\\
+      % Author
+      \mbox{\parbox[t][4em][t]{\textwidth}{%
+          \begin{doublespaced}
+            \centering 
+            by \\ 
+            \@author \\
+            {\@copyrightyear} \\
+            All Rights Reserved
+          \end{doublespaced} }
+      }\\
+    \end{center}
+    \thispagestyle{empty} % No number on copyright page
+    \clearpage
+    % Set numbering so next page is ii for ETD 
+    \if@twoside {} \else \setcounter{page}{2} \fi
+  }
 
 \newcommand{\makesignature}{%
   \if@openright\cleardoublepage\else\clearpage\fi 
@@ -1814,7 +1598,7 @@
   \pdfbookmark[1]{Dedication}{dedication}
   % Define headers
   \def\firheadmark{\tochead{Dedication}}
-  \def\conheadmark{\tochead{Dedication - Continued}}
+  \def\conheadmark{\tochead{Dedication -- Continued}}
 
   % Set pagestyle to continued
   \pagestyle{continued}
@@ -1851,7 +1635,7 @@
 
   % Define headers
   \def\firheadmark{\tochead{Acknowledgements}}
-  \def\conheadmark{\tochead{Acknowledgements - Continued}}
+  \def\conheadmark{\tochead{Acknowledgements -- Continued}}
 
   % Set pagestyle to continued
   \pagestyle{continued}
@@ -1863,16 +1647,18 @@
   \thispagestyle{firstpage}
 
   \begingroup
-    
-  % \newlinestretch{1.0}
-}{\par\endgroup 
+  \begin{doublespaced}
+}{
+  \par
+  \end{doublespaced}
+  \endgroup 
   % End of Acknowlegements
   \clearpage
   
   % Remove header spacing & reset pagestyle
   \restoregeometry
   \pagestyle{\front@pagestyle}
-}%Acknowledgements
+}% end acknowledgements
 
 
 %% \begin{vita}...\end{vita} formats a
@@ -1884,7 +1670,7 @@
   \pdfbookmark[1]{Cirriculum Vitae}{vita}
   % Define headers
   \def\firheadmark{\tochead{Vita}}
-  \def\conheadmark{\tochead{Vita - Continued}}
+  \def\conheadmark{\tochead{Vita -- Continued}}
 
   % Set pagestyle to continued
   \pagestyle{continued}
@@ -1907,7 +1693,41 @@
   % Remove header spacing & reset pagestyle
   \restoregeometry
   \pagestyle{\front@pagestyle}
-} %endVita
+} % end Vita
+
+%% \begin{nomenclature}...\end{nomenclature} formats a
+%% nomenclature section
+\newenvironment{nomen}{%
+  \typeout{*****************        Nomenclature       ******************}
+  \if@openright\cleardoublepage\else\clearpage\fi 
+  \phantomsection%
+  \pdfbookmark[1]{Nomenclature}{nomenclature}
+  % Define headers
+  \def\firheadmark{\tochead{Nomenclature}}
+  \def\conheadmark{\tochead{Nomenclature -- Continued}}
+
+  % Set pagestyle to continued
+  \pagestyle{continued}
+
+  % Setup header spacing
+  \expandafter\newgeometry\expandafter{\marginprel}
+  
+  % Header on first page
+  \thispagestyle{firstpage}
+
+  \begingroup
+  \begin{singlespaced}
+}{
+  \par
+  \end{singlespaced}
+  \endgroup 
+  % End of Vita
+  \clearpage
+  
+  % Remove header spacing & reset pagestyle
+  \restoregeometry
+  \pagestyle{\front@pagestyle}
+} % end Vita
 
 
 %% Change \begin{abstract}...\end{abstract} to follow guidelines
@@ -1919,7 +1739,7 @@
   \pdfbookmark[0]{Abstract}{abstract}
   % Define headers
   \def\firheadmark{\tochead{Abstract}}
-  \def\conheadmark{\tochead{Abstract - Continued}}
+  \def\conheadmark{\tochead{Abstract -- Continued}}
 
   % Set pagestyle to continued
   \pagestyle{continued}
@@ -1978,23 +1798,21 @@
     \else
     \clearpage
     \fi
-    \quad \vfill
+    \quad \vspace{2.5in}\par
     \begin{center}
-      % \underline{\MakeUppercase{\refname}}
       \MakeUppercase{\refname}
     \end{center}
-    \vfill \quad
     \if@openright
     \cleardoublepage
     \else
     \clearpage
     \fi
     \else %there is only one appendix so put \refname on same page
-    \centering\underline{\MakeUppercase{\refname}}
+    \centering{\MakeUppercase{\refname}}
     \vskip 30\p@  %\vskip 0.3in
     \fi %end ifAppendmultiple
     \else  %there is no appendix so put \refname on same page
-    \centering\underline{\MakeUppercase{\refname}}
+    \centering{\MakeUppercase{\refname}}
     \vskip 30\p@  %\vskip 0.3in
     \fi %end ifAppend
 
@@ -2013,7 +1831,8 @@
   \clubpenalty4000
   \@clubpenalty \clubpenalty
   \widowpenalty4000%
-  \sfcode`\.\@m}
+  \sfcode`\.\@m
+}%
 {\def\@noitemerr
   {\@latex@warning{Empty ``thebibliography'' environment}
     \pagestyle{\back@pagestyle}
@@ -2022,5 +1841,10 @@
 }
 
 
+% Force float only pages to align at the top of the page
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
 
 
