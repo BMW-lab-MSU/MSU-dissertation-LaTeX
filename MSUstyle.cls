@@ -765,14 +765,18 @@
     \par\nobreak
     \vskip 20\p@
     \interlinepenalty\@M
-    \centering \MakeUppercase{#1}\par\nobreak
+    \begin{doublespaced}
+      \centering \MakeUppercaseWithNewline{#1}\par\nobreak
+    \end{doublespaced}
     \clearpage
   }
 }
 \else
 \def\@makeapphead#1{%
   { %\parindent \z@ \raggedright \normalfont
-    \centering{\MakeUppercase{\appendixname}: \MakeUppercase{#1}}
+    \begin{doublespaced}
+      \centering \MakeUppercase{\appendixname}: \MakeUppercaseWithNewline{#1}
+    \end{doublespaced}
     \vskip 30\p@  %\vskip 0.3in
   }
 }
