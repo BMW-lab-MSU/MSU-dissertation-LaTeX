@@ -763,7 +763,7 @@
       \underline{\MakeUppercase{\appendixname}\space \thechapter}
     \end{center}
     \par\nobreak
-    \vskip 20\p@
+    \vskip 0\p@
     \interlinepenalty\@M
     \begin{doublespaced}
       \centering \MakeUppercaseWithNewline{#1}\par\nobreak
@@ -811,7 +811,7 @@
 
 % Maximum width of a TOC/LOC/LOF entry before a linebreak occurs (actually the min cline width)
 \renewcommand{\@pnumwidth}{1in} 
-\renewcommand{\@tocrmarg}{1in}
+\renewcommand{\@tocrmarg}{1.5in}
 
 \newcommand*{\MT@dottedtocline}[5]{%
   \ifnum #1>\c@tocdepth \else
