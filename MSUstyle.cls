@@ -136,16 +136,6 @@
   \renewcommand{\degreetype}{\@dissertationDT}%
 }
 
-% reseting of numbering between chapters. 
-\DeclareOption{nonumreset}{
-  \newif\ifnumreset
-  \numresetfalse
-}
-\DeclareOption{numreset}{
-  \newif\ifnumreset
-  \numresettrue
-}
-
 % Appendix option
 \DeclareOption{appendsingle}{\Appendsingletrue}
 \DeclareOption{appendmultiple}{\Appendmultipletrue}
@@ -158,7 +148,7 @@
 %%%%%%%%%%%% OPTION EXECUTION       %%%%%%%%%%%%
 %% Default settings.
 \ExecuteOptions{12pt,letterpaper,oneside,%
-  openright,doublespaced,normalmargins,dissertation,final,numreset}
+  openright,doublespaced,normalmargins,dissertation,final}
 % 
 \ProcessOptions
 
@@ -1086,34 +1076,10 @@
 
 
 %%%% for numbering figures and tables in sequential order not beginning again at the start of each chapter.
-\newcommand{\@removefromreset}[2]{{%
-    \expandafter\let\csname c@#1\endcsname\@removefromreset
-    \def\@elt##1{%
-      \expandafter\ifx\csname c@##1\endcsname\@removefromreset
-      \else
-      \noexpand\@elt{##1}%
-      \fi}%
-    \expandafter\xdef\csname cl@#2\endcsname{%
-      \csname cl@#2\endcsname}}}
-
-\ifnumreset
 \def\thefigure{\thechapter.\@arabic\c@figure}
 \def\thetable{\thechapter.\@arabic\c@table}
 \def\theequation{\thechapter.\arabic{equation}}
 \def\thealgorithm{\thechapter.\arabic{algorithm}}
-\else
-\@removefromreset{figure}{chapter}
-\@removefromreset{table}{chapter}
-\@removefromreset{equation}{chapter}
-\@removefromreset{algorithm}{chapter}
-\def\thefigure{\@arabic\c@figure}
-\def\thetable{\@arabic\c@table}
-\def\thealgorithm{\@arabic\c@algorithm}
-\def\theequation{\arabic{equation}}
-\fi
-
-
-
 
 %% Redefine the macro used for floats (including figures and tables)
 %% so that single spacing is used.
