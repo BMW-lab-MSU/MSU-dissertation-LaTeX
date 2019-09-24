@@ -1757,7 +1757,7 @@
   \phantomsection
   \addcontentsline{toc}{chapter}%
   {\texorpdfstring{\MakeUppercase{\refname}}{\refname}}
-  \bibliography{\@bibfiles}
+  %\bibliography{\@bibfiles} 
   \fi %end if bibpage
 }
 

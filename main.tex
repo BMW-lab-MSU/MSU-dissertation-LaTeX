@@ -102,8 +102,6 @@
 % put searchable words you want internet search engines to find here
 \keys{Engineering, PhD, Dissertation, Template, Latex, Montana, Montana State University} 
  
-\bibfiles{mybib} %your .bib file(s), files containing bibliographic 
-
 %  Configuration of hyperref package
 \hypersetup{%
 	baseurl={\OWNwebpage}, %baseurl is url that is in pdf document properties
@@ -169,7 +167,8 @@
 
 % REFERENCES
 \bibliographystyle{abbrv} % Use a style you and your adviser like
-\references  %do not change this
+\references  % Reference title and TOC entry
+\bibliography{mybib} % Bibliography.  Add your .bib file(s) here
 
 % APPENDIX
 % If you have an appendix use either the option appendsingle (1 appendix) or appendmultiple (>1 appendix) in your document class
