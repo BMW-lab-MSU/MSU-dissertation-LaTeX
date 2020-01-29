@@ -41,16 +41,18 @@
 %                               blank pages added so chapter start on right page (use for nicest printed material)
 
 % ========================= %
-%         Packages  (add as needed)              %
+%  Packages                 %
+%  (add as needed)          %
 % ========================= %
 \usepackage[final]{graphicx} %for the \includegraphics command and figures put [final] before ...
 %%    {graphix} if you want figures to show up even while in draft mode
 \usepackage{subcaption}    % to be able to have multiple plots in one figure
 \usepackage{color} % for changing text color in chapters \textcolor{red}{red text read here}. 
 \usepackage{varioref}  % for \vref{figure} which shows up like ``figure 4 on page 6'' 
-\usepackage[final]{listings} %used for formatting code
+\usepackage[final]{listings} % used for formatting code
 \usepackage[pdftex,hidelinks]{hyperref}
 \usepackage{cite} %compresses the citations so \cite{ref1,ref2,ref3,ref4} is printed as [1-4] instead of [1,2,3,4]
+\usepackage[]{natbib} % for citations
 
 \usepackage{tikz} % used for creating figures
 \usetikzlibrary{calc}
@@ -78,7 +80,7 @@
 
 
 % ======================= %
-%  User defined commands (  %
+%  User defined commands  %
 % ======================= %
 \newcommand{\etc}{etc.}
 \newcommand{\eg}{e.g.}
@@ -166,7 +168,7 @@
 % Add additional chapters here
 
 % REFERENCES
-\bibliographystyle{abbrv} % Use a style you and your adviser like
+\bibliographystyle{plain} % Use a style you and your adviser like
 \references  % Reference title and TOC entry
 \bibliography{mybib} % Bibliography.  Add your .bib file(s) here
 

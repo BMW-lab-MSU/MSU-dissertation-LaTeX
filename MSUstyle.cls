@@ -1757,61 +1757,40 @@
   \phantomsection
   \addcontentsline{toc}{chapter}%
   {\texorpdfstring{\MakeUppercase{\refname}}{\refname}}
-  %\bibliography{\@bibfiles} 
+  % \bibliography{\@bibfiles}
+
+  \ifAppend
+  \ifAppendmultiple
+  \if@openright
+  \cleardoublepage
+  \else
+  \clearpage
+  \fi
+  \quad \vspace{2.5in}\par
+  \begin{center}
+    
+    \MakeUppercase{\refname}
+  \end{center}
+  \if@openright
+  \cleardoublepage
+  \else
+  \clearpage
+  \fi
+  \else %there is only one appendix so put \refname on same page
+  
+  \centering{\MakeUppercase{\refname}}
+  \vskip 30\p@  %\vskip 0.3in
+  \fi %end ifAppendmultiple
+  \else  %there is no appendix so put \refname on same page
+  
+  \centering{\MakeUppercase{\refname}}
+  \vskip 30\p@  %\vskip 0.3in
+  \fi %end ifAppend
+
+  % Remove title from bibliography
+  \renewcommand{\bibsection}{}
+  
   \fi %end if bibpage
-}
-
-
-%%% bibiliography page formatting    ...this is not for bibliography styles
-\renewenvironment{thebibliography}[1]{
-  {%
-    \ifAppend
-    \ifAppendmultiple
-    \if@openright
-    \cleardoublepage
-    \else
-    \clearpage
-    \fi
-    \quad \vspace{2.5in}\par
-    \begin{center}
-      \MakeUppercase{\refname}
-    \end{center}
-    \if@openright
-    \cleardoublepage
-    \else
-    \clearpage
-    \fi
-    \else %there is only one appendix so put \refname on same page
-    \centering{\MakeUppercase{\refname}}
-    \vskip 30\p@  %\vskip 0.3in
-    \fi %end ifAppendmultiple
-    \else  %there is no appendix so put \refname on same page
-    \centering{\MakeUppercase{\refname}}
-    \vskip 30\p@  %\vskip 0.3in
-    \fi %end ifAppend
-
-    \pagestyle{\body@pagestyle}% REFERENCES uses BODY pagestyle, not endmatter.
-  }
-  \list{\@biblabel{\@arabic\c@enumiv}}%
-  { \settowidth\labelwidth{\@biblabel{#1}}%
-    \leftmargin\labelwidth
-    \advance\leftmargin\labelsep
-    \@openbib@code
-    \usecounter{enumiv}%
-    \let\p@enumiv\@empty
-    \renewcommand\theenumiv{\@arabic\c@enumiv}
-  }%
-  \sloppy
-  \clubpenalty4000
-  \@clubpenalty \clubpenalty
-  \widowpenalty4000%
-  \sfcode`\.\@m
-}%
-{\def\@noitemerr
-  {\@latex@warning{Empty ``thebibliography'' environment}
-    \pagestyle{\back@pagestyle}
-  }%
-  \endlist
 }
 
 
