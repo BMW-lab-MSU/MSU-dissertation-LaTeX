@@ -57,6 +57,10 @@
 \newif\if@altchapter
 \@altchapterfalse % initially false by default
 
+%% Switch for big inner margins (toggled by ``bigmargin'' option).
+\newif\if@bigmargin
+\@bigmarginfalse % initially false by default
+
 %% Switches for appendices
 \newif\ifAppendmultiple
 \Appendmultiplefalse % initially false by default
@@ -104,6 +108,10 @@
 
 %% ``altchapter'' option: use alternative chapter headings
 \DeclareOption{altchapter}{\@altchaptertrue}
+\DeclareOption{numberedsections}{\@altchaptertrue}
+
+%% ``bigMargin'' options: use 1.5" inner margins
+\DeclareOption{bigmargin}{\@bigmargintrue}
 
 
 %% Point Size options: change current setting.
@@ -559,7 +567,11 @@
 % Top header also includes headsep (distance between number and top of text
 \addtolength{\newtop}{\headsep}      
 % Define all margins
+\if@bigmargin%
 \def\margingeom{inner=1.5in,outer=1.0in,top=\newtop,bottom=1.0in,headsep=\headsep}
+\else%
+\def\margingeom{inner=1.0in,outer=1.0in,top=\newtop,bottom=1.0in,headsep=\headsep}
+\fi%
 % Set margins using geometry package (showframe for debugging)
 %\RequirePackage[\margingeom,showframe]{geometry}
 \RequirePackage[\margingeom]{geometry}
@@ -569,14 +581,22 @@
 \newlength\preltop     \preltop=\newtop
 \addtolength{\prelheadsep}{3\baselineskip}
 \addtolength{\preltop}{3\baselineskip}
+\if@bigmargin%
 \def\marginprel{inner=1.5in,outer=1.0in,top=\preltop,bottom=1.0in,headsep=\prelheadsep}
+\else%
+\def\marginprel{inner=1.0in,outer=1.0in,top=\preltop,bottom=1.0in,headsep=\prelheadsep}
+\fi%
 
 % Margins used for LOF, LOT, and LOA (extra line for headings)
 \newlength\listheadsep \listheadsep=\headsep
 \newlength\listtop     \listtop=\newtop
 \addtolength{\listheadsep}{5\baselineskip}
 \addtolength{\listtop}{5\baselineskip}
+\if@bigmargin%
 \def\marginlist{inner=1.5in,outer=1.0in,top=\listtop,bottom=1.0in,headsep=\listheadsep}
+\else%
+\def\marginlist{inner=1.0in,outer=1.0in,top=\listtop,bottom=1.0in,headsep=\listheadsep}
+\fi%
 
 % Default line spacing: use current setting from options.
 \linespacing{\@thesislnsp}
