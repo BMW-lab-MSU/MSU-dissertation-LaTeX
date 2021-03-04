@@ -1798,12 +1798,16 @@
   \fi
   \else %there is only one appendix so put \refname on same page
   
-  \centering{\MakeUppercase{\refname}}
+  \begin{center}
+    \MakeUppercase{\refname}
+  \end{center}
   \vskip 30\p@  %\vskip 0.3in
   \fi %end ifAppendmultiple
   \else  %there is no appendix so put \refname on same page
   
-  \centering{\MakeUppercase{\refname}}
+  \begin{center}
+    \MakeUppercase{\refname}
+  \end{center}
   \vskip 30\p@  %\vskip 0.3in
   \fi %end ifAppend
 
