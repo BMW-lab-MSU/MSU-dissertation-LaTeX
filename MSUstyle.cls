@@ -24,7 +24,7 @@
 
 %%%%%%%%%%%% IDENTIFICATION        %%%%%%%%%%%%
 \newcommand{\MSUstyleversion}{2.0}% current version number
-\newcommand{\MSUstyleupdated}{2017/6/30}% date of last change(s)
+\newcommand{\MSUstyleupdated}{2023/08/24}% date of last change(s)
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{MSUstyle}
@@ -33,6 +33,7 @@
 \RequirePackage[plain]{algorithm}
 \RequirePackage{algorithmic}
 
+\RequirePackage{ccicons}
 
 %%%%%%%%%%%% INITIAL CODE         %%%%%%%%%%%%
 \widowpenalty=500 % Try to avoid widows at bottom of page 
@@ -66,6 +67,11 @@
 \Appendmultiplefalse % initially false by default
 \newif\ifAppendsingle
 \Appendsinglefalse % initially false by default
+
+%% Switches for Creative Commons copyright
+\newif\ifCopyrightcc
+\Copyrightccfalse % initially false
+
 
 %% Because of the draft option, and to allow users to override
 %% defaults, we don't want to be passing conflicting options back to
@@ -143,10 +149,16 @@
   \renewcommand{\degree}{\@dissertationD}%
   \renewcommand{\degreetype}{\@dissertationDT}%
 }
+\DeclareOption{compexam}{\renewcommand{\degree}{\@dissertationD}%
+  \renewcommand{\degreetype}{\@compexam}%
+}
 
 % Appendix option
 \DeclareOption{appendsingle}{\Appendsingletrue}
 \DeclareOption{appendmultiple}{\Appendmultipletrue}
+
+%% Copyright options
+\DeclareOption{copyrightcc}{\Copyrightcctrue}
 
 
 %% All other options are passed to the base class directly.
@@ -362,6 +374,7 @@
 \def\@thesisD{Master of Science} %degree
 \def\@dissertationDT{dissertation} %degree type
 \def\@dissertationD{Doctor of Philosophy} %degree
+\def\@compexam{comprehensive exam}
 
 \def\@dissertationPermission{In presenting this dissertation in partial fulfillment of the requirements for a doctoral degree at Montana State University, I agree that the Library shall make it available to borrowers under rules of the Library. I further agree that copying of this dissertation is allowable only for scholarly purposes, consistent with ``fair use'' as prescribed in the U.S. Copyright Law. Requests for extensive copying or reproduction of this dissertation should be referred to ProQuest Information and Learning, 300 North Zeeb Road, Ann Arbor, Michigan 48106, to whom I have granted ``the exclusive right to reproduce and distribute my dissertation in and from microform along with the non-exclusive right to reproduce and distribute my abstract in any format in whole or in part.''}
 
@@ -1504,7 +1517,11 @@
             by \\ 
             \@author \\
             {\@copyrightyear} \\
+            \ifCopyrightcc
+            \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International License} \ccby
+            \else
             All Rights Reserved
+            \fi
           \end{doublespaced} }
       }\\
     \end{center}

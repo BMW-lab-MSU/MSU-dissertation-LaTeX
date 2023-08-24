@@ -1,4 +1,4 @@
-\documentclass[dissertation,appendsingle]{MSUstyle}
+\documentclass[dissertation,appendsingle,copyrightcc]{MSUstyle}
 %
 %  Created by Seth Humphries 
 %  Update and maintained by Prof. Mark Owkes mark.owkes@montana.edu
@@ -24,6 +24,17 @@
 %  use \documentclass[thesis]{MSUstyle} to adjustment the front matter according to ETD style rules that
 % are different for a thesis than for a dissertation.
 %
+% COMPREHENSIVE EXAM -----------
+% \use \documenatclass[compexam]{MSUstyle} to format the document for a written
+% comprehensive exam. This only changes "dissertation" to "comprehensive exam";
+% everything else is the same as the dissertation format. This is an acceptable
+% format for the written comprehensive exam in the Electrical and Computer
+% Engineering department; other departments may vary.
+%
+% COPYRIGHT OPTIONS -----------
+% If you want to license your work under a Creative Commons BY 4.0 license,
+% use the copyrightcc option
+%
 % ADDITIONAL OPTIONS ----------
 % 10pt, singlespaced, and draft allow you to require less number of pages for editing
 % A draft version number can be set with, e.g., \draftver{1.0}
@@ -48,13 +59,12 @@
 \usepackage[final]{graphicx} %for the \includegraphics command and figures put [final] before ...
 %%    {graphix} if you want figures to show up even while in draft mode
 \usepackage{subcaption}    % to be able to have multiple plots in one figure
-\usepackage{color} % for changing text color in chapters \textcolor{red}{red text read here}. 
 \usepackage{varioref}  % for \vref{figure} which shows up like ``figure 4 on page 6'' 
 \usepackage[final]{listings} % used for formatting code
 \usepackage[pdftex,hidelinks]{hyperref}
-\usepackage[numbers,sort&compress]{natbib} % for citations
 \usepackage{longtable} % for long nomenclature (and other long tables)
 
+% If you don't use tikz for figures, you can delete the following lines
 \usepackage{tikz} % used for creating figures
 \usetikzlibrary{calc}
 \usetikzlibrary{patterns}
@@ -63,9 +73,42 @@
 \usetikzlibrary{decorations.pathmorphing}
 \usetikzlibrary{arrows}
 
-\usepackage{amsmath}
+\usepackage{amsmath, amssymb}
 \usepackage{lipsum} % Generates random text
 %\usepackage{showframe} % View margins
+
+\usepackage{xcolor} % for changing text color in chapters \textcolor{red}{red text read here}. 
+\usepackage[final]{listings} % used for formatting code
+\usepackage[pdftex,hidelinks]{hyperref}
+
+% For getting the current month name. This can be removed if you'd rather
+% manually specify the month name in the \submitdate definition
+\usepackage{datetime}
+
+
+% ========================= %
+% Citation packages         %
+% ========================= %
+% Comment out the following lines if you want to use natbib insetad of biblatex
+% Default to using IEEE-style numeric references. Change as desired
+\usepackage[
+	backend=biber,
+	style=numeric,
+	sorting=none,
+]{biblatex}
+\addbibresource{mybib.bib}
+
+% Uncomment the following line if you want to use natbib
+% \usepackage[numbers,sort&compress]{natbib} % for citations
+
+% For making nice-looking tables
+\usepackage{booktabs}
+
+% placeins can be used for forcing figures and other floats to show up where
+% you want; particularly, the \FloatBarrier command is useful
+\usepackage[section]{placeins}
+
+\usepackage{breakurl}
 
 % Style of code listings (Change as needed)
 \lstset{%set Code listings styles
@@ -79,6 +122,7 @@
 	breakatwhitespace=false,   %break line not just at whitespaces
 }
 
+\graphicspath{{./figs/}}
 
 % ======================= %
 %  User defined commands  %
@@ -90,25 +134,28 @@
 % =============================== %
 %  Definitions: Change as needed  %
 % =============================== %
-\name{Chris Jordan Doe} %PUT your FULL name here (First Middle Last)
+\name{First Middle Last} %PUT your FULL name here (First Middle Last)
 \DocTitle{This is the title of your thesis or dissertation \\ which may span multiple lines \\ (but no more than 3 lines) } 
 \OWNwebpage{http://mywebsite.net} %your personal webpage
-\degreetitle{Engineering} % may be different than department... ie MS in Electrical Engineering is not Elect. and Com. Engnr degree.
+\degreetitle{Electrical Engineering} % may be different than department... ie MS in Electrical Engineering is not Elect. and Com. Engnr degree.
 \department{Electrical and Computer Engineering} 
-\committeechair{Dr. Kevin S. Repasky} 
-\departmentchair{Dr. Robert C. Maher}
-\graduatedean{Dr. Carl A. Fox}
-\submitdate{April 2017} 
-\copyrightyear{2017} % add one to year if document submitted in Dec.
+\committeechair{Dr. Committee chair} 
+\departmentchair{Dr. Department Chair}
+\graduatedean{Dr. Graduate Dean}
+\submitdate{\monthname~\the\year} 
+\copyrightyear{\the\year}
 %\draftver{1.0} % versioning for use with draft option
+
 
 % put searchable words you want internet search engines to find here
 \keys{Engineering, PhD, Dissertation, Template, Latex, Montana, Montana State University} 
+
  
 %  Configuration of hyperref package
 \hypersetup{%
 	baseurl={\OWNwebpage}, %baseurl is url that is in pdf document properties
-% 	bookmarks=true, %show bookmarks when opening pdf
+	bookmarks=true, %show bookmarks when opening pdf
+	bookmarksdepth=3, %show up to subsubsections in pdf bookmarks
 	citecolor=black, %citations show up black
 	colorlinks=true, %use colored links
 	draft=false, % prevents hyperref from draft mode...keeps bookmarks and hyperlinks in draft mode
@@ -170,9 +217,13 @@
 % Add additional chapters here
 
 % REFERENCES
-\bibliographystyle{plainnat} % Use a style you and your adviser like
-\references  % Reference title and TOC entry
-\bibliography{mybib} % Bibliography.  Add your .bib file(s) here
+% Uncomment to use natbib instead of biblatex
+% \bibliography{mybib} % Bibliography.  Add your .bib file(s) here
+% \bibliographystyle{plainnat} % Use a style you and your adviser like
+% \references  % Reference title and TOC entry
+
+% TODO: "REFERENCES" shows up in all caps in the pdf bookmarks, whereas when using bibtex that was not the case. Other than that, it looks like the formatting is okay when using biblatex instead of bibtex...
+\printbibliography[heading=bibintoc, title={REFERENCES CITED}]
 
 % APPENDIX
 % If you have an appendix use either the option appendsingle (1 appendix) or appendmultiple (>1 appendix) in your document class
