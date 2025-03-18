@@ -223,7 +223,13 @@
 % \references  % Reference title and TOC entry
 
 % TODO: "REFERENCES" shows up in all caps in the pdf bookmarks, whereas when using bibtex that was not the case. Other than that, it looks like the formatting is okay when using biblatex instead of bibtex...
-\printbibliography[heading=bibintoc, title={REFERENCES CITED}]
+% TODO: Support using biblatex when there are appendices (REFERENCES CITED needs to be on a separate page in this case).
+% Comment out to use natbib instead of biblatex
+% NOTE: the vskip in the prenote makes it so there is a triple space between the heading and the first bib entry.
+% NOTE: singlespacing ensures that each entry is single-spaced, while the space between entries is double-spaced.
+\singlespacing{
+    \printbibliography[prenote={\vskip 0pt}, heading=bibintoc, title={REFERENCES CITED}]
+}
 
 % APPENDIX
 % If you have an appendix use either the option appendsingle (1 appendix) or appendmultiple (>1 appendix) in your document class
