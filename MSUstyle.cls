@@ -32,7 +32,7 @@
 \RequirePackage{calc}% part of LaTeX tools bundle   
 \RequirePackage[plain]{algorithm}
 \RequirePackage{algorithmic}
-
+\RequirePackage{listing}
 \RequirePackage{ccicons}
 
 %%%%%%%%%%%% INITIAL CODE         %%%%%%%%%%%%
@@ -410,6 +410,11 @@
 \newif\ifalgorithmspage
 \algorithmspagetrue % initially true by default
 
+%% Switch for generating a list of listings
+% 
+\new\iflistingspage
+\listingspagetrue
+
 %% Switch for generating a table of contents
 % 
 \newif\ifcontentspage
@@ -482,6 +487,9 @@
 \newcommand{\MTlistalgorithmname}{}
 \newcommand{\loacontentlinestring}{}
 \newcommand{\loapdfbookmarkstring}{}
+\newcommand{\MTlistlistingname}{}
+\newcommand{\lolcontentlinestring}{}
+\newcommand{\lolpdfbookmarkstring}{}
 
 \newcommand{\settocstring}[1]{%
   \renewcommand{\MTcontentsname}{#1}
@@ -517,11 +525,21 @@
   \renewcommand{\loapdfbookmarkstring}{#1}
 }
 
+\newcommand{\setlolstring}[1]{%
+  \renewcommand{\MTlistlistingname}{#1}
+  \renewcommand{\listlistingname}{\MakeUppercase{#1}}
+  \renewcommand{\lolcontentlinestring}{%
+    \texorpdfstring{\MakeUppercase{#1}}{#1}
+  }
+  \renewcommand{\lolpdfbookmarkstring}{#1}
+}
+
 %% bookmark names
 \settocstring{Table of Contents}
 \setlotstring{List of Tables}
 \setlofstring{List of Figures}
 \setloastring{List of Algorithms}
+\setlolstring{List of Listings}
 
 
 %%%%%% Page Styles
@@ -655,6 +673,12 @@
 {\setlength\abovecaptionskip{2\p@}%
   \setlength\belowcaptionskip{6\p@}%
   \@float{algorithm}}
+{\end@float}
+
+\renewenvironment{listing}
+{\setlength\abovecaptionskip{2\p@}%
+  \setlength\belowcaptionskip{6\p@}%
+  \@float{listing}}
 {\end@float}
 
 % ========================= %
@@ -897,6 +921,7 @@
   \MT@dottedtocline{1}{0.5in}{2.0em}}
 \let\l@table\l@figure % Same for table and algorithm
 \let\l@algorithm\l@figure
+\let\l@listing\l@figure
 \newlength{\MT@tmpa}
 
 
@@ -1016,6 +1041,45 @@
   \fi
 }
 
+\newcommand{\do@listingspage}{%
+  \iflistingspage
+  \if@openright\cleardoublepage\else\clearpage\fi 
+
+  % must clear page here, so that phantomsection\addcontentsline is on the correct page
+  \phantomsection%
+  \pdfbookmark[0]{\lolpdfbookmarkstring}{Listings}%
+  \settoheight{\MT@tmpa}{A}
+  \set@MTtocskip{\MT@tmpa}
+ % {\newlinestretch{1}
+    % Define headers
+    \def\conheadmark{\listhead{List of Listings -- Continued}{Listing}}
+    \def\firheadmark{\listhead{List of Listings}{Listing}}
+
+    % Set pagestyle to continued
+    \pagestyle{continued}
+
+    % Setup header spacing
+    \expandafter\newgeometry\expandafter{\marginlist}
+    
+    % Header on first page
+    \thispagestyle{firstpage}
+
+    % List of Listings
+    \newlinestretch{1.0}%
+    \@starttoc{lol}
+
+    % End of list
+    \clearpage
+    
+    % Remove header spacing & reset pagestyle
+    \restoregeometry
+    \pagestyle{\front@pagestyle}
+
+  %}
+  \newpage
+  \fi
+}
+
 \newcommand{\do@contentspage}{%
   \ifcontentspage
   \if@openright\cleardoublepage\else\clearpage\fi 
@@ -1104,6 +1168,7 @@
   \do@tablespage
   \do@figurespage
   \do@algorithmspage
+  \do@listingspage
 }
 
 
@@ -1113,6 +1178,7 @@
 \def\thetable{\thechapter.\@arabic\c@table}
 \def\theequation{\thechapter.\arabic{equation}}
 \def\thealgorithm{\thechapter.\arabic{algorithm}}
+\def\thelisting{\thechapter.\arabic{listing}}
 
 %% Redefine the macro used for floats (including figures and tables)
 %% so that single spacing is used.
